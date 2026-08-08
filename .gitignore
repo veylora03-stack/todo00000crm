@@ -1,0 +1,31 @@
+# Data files (personal user data - NOT for GitHub)
+/data/*.json
+!/data/.gitkeep
+/backups/
+/backups-zip/
+
+# Test files
+/src/public/test-js.html
+/src/public/real-test.html
+
+# Broken backups
+*.broken.bak
+
+# Logs
+*.log
+
+# Test reports
+test-report-*.txt
+
+# Windows system files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# PowerShell temporary
+*.tmp
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp

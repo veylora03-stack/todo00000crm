@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CRM Pro</title>
+    <link rel="stylesheet" href="css/app.css?v=20260808214859" />
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="version" content="20260808214859" />
+    <link rel="manifest" href="/manifest.json?v=20260808214859" />
+    <meta name="theme-color" content="#7c3aed" />
+    <meta name="description" content="CRM Pro - سیستم مدیریت شخصی آفلاین" />
+    <link rel="icon" type="image/svg+xml" href="/icons/icon-192.svg" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.svg" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="CRM Pro" />
+</head>
+<body>
+    <div class="app">
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-logo">C</div>
+                <div class="brand-name">CRM Pro</div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-group">
+                    <div class="nav-group-title">Workspace</div>
+                    <div class="nav-link active" data-view="dashboard">
+                        <span class="nav-icon"></span>
+                        <span class="nav-link-label">داشبورد</span>
+                    </div>
+                    <div class="nav-link" data-view="inbox">
+                        <span class="nav-icon"></span>
+                        <span class="nav-link-label">Inbox</span>
+                        <span class="nav-link-count">0</span>
+                    </div>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-group-title">CRM</div>
+                    <div class="nav-link" data-view="people">
+                        <span class="nav-icon"></span>
+                        <span class="nav-link-label">مخاطبان</span>
+                        <span class="nav-link-count" id="count-people">0</span>
+                    </div>
+                    <div class="nav-link" data-view="tasks">
+                        <span class="nav-icon"></span>
+                        <span class="nav-link-label">کارها</span>
+                        <span class="nav-link-count" id="count-tasks">0</span>
+                    </div>
+                    <div class="nav-link" data-view="projects">
+                        <span class="nav-icon"></span>
+                        <span class="nav-link-label">پروژه‌ها</span>
+                        <span class="nav-link-count" id="count-projects">0</span>
+                    </div>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-group-title">Knowledge</div>
+                    <div class="nav-link" data-view="ideas">
+                        <span class="nav-icon"></span>
+                        <span class="nav-link-label">ایده‌ها</span>
+                        <span class="nav-link-count" id="count-ideas">0</span>
+                    </div>
+                                        <div class="nav-link" data-view="graph">
+                        <span class="nav-icon"></span>
+                        <span class="nav-link-label">گراف دانش</span>
+                    </div>
+                    <div class="nav-link" data-view="notes">
+                        <span class="nav-icon"></span>
+                        <span class="nav-link-label">یادداشت‌ها</span>
+                        <span class="nav-link-count" id="count-notes">0</span>
+                    </div>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-group-title">سیستم</div>
+                    <div class="nav-link" data-view="backups">
+                        <span class="nav-icon"></span>
+                        <span class="nav-link-label">پشتیبان‌ها</span>
+                    </div>
+                                        <div class="nav-link" data-view="reports">
+                        <span class="nav-icon"></span>
+                        <span class="nav-link-label">گزارش‌ها</span>
+                    </div>
+                    <div class="nav-link" data-view="settings">
+                        <span class="nav-icon"></span>
+                        <span class="nav-link-label">تنظیمات</span>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="sidebar-user">
+                <div class="avatar" style="background: linear-gradient(135deg, #7c3aed, #ec4899);">U</div>
+                <div class="user-meta">
+                    <div class="user-name">کاربر من</div>
+                    <div class="user-status">Online</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ===== MAIN AREA ===== -->
+        <div class="main">
+            <header class="topbar">
+                <div class="topbar-breadcrumb">
+                    <span class="breadcrumb-item" id="bc-root">Workspace</span>
+                    <span class="breadcrumb-separator" id="bc-sep" style="display:none;"></span>
+                    <span class="breadcrumb-item current" id="bc-current" style="display:none;"></span>
+                </div>
+
+                <button class="topbar-search-btn" onclick="openCommandPalette()">
+                    <span class="search-icon"></span>
+                    <span class="search-text">جستجو...</span>
+                    <span class="kbd">Ctrl</span>
+                    <span class="kbd">K</span>
+                </button>
+
+                <div class="topbar-actions">
+                    <button class="icon-button install-btn-pwa" id="installBtn" title="نصب اپلیکیشن" style="display:none;"><span></span></button>
+                    <button class="icon-button" id="notificationBtn" title="Notifications" onclick="toggleNotificationDropdown()" style="position:relative;">
+    <span></span>
+    <span class="notification-badge" id="notifBadge" style="display:none;">0</span>
+</button>
+<div class="notification-dropdown" id="notifDropdown">
+    <div class="notification-dropdown-header">
+        <div class="notification-dropdown-title">اعلان‌ها</div>
+        <div class="notification-dropdown-actions">
+            <button class="btn btn-ghost" onclick="clearAllNotifications()" style="font-size:11px; height:auto; padding:4px 8px;">پاک کردن همه</button>
+        </div>
+    </div>
+    <div class="notification-list" id="notifList"></div>
+</div>
+                    <button class="icon-button" title="Settings" onclick="switchView('settings')"><span></span></button>
+                </div>
+            </header>
+
+            <main class="content" id="content">
+                <!-- ===== DASHBOARD ===== -->
+                <section id="view-dashboard" class="view active">
+                    <div class="analytics-hero">
+                        <div class="analytics-hero-content">
+                            <div>
+                                <div class="analytics-greeting" id="greeting">سلام</div>
+                                <div class="analytics-title">داشبورد تحلیلی شما</div>
+                                <div class="analytics-subtitle">نمای کلی از فعالیت‌ها و عملکرد</div>
+                            </div>
+                            <div class="analytics-hero-stats" id="heroStats"></div>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid-v2" id="statsGrid"></div>
+
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <div>
+                                    <div class="chart-title">فعالیت‌های 7 روز اخیر</div>
+                                    <div class="chart-subtitle">نمودار میله‌ای</div>
+                                </div>
+                            </div>
+                            <div class="chart-body">
+                                <div id="activityChartContainer" style="height:220px;"></div>
+                            </div>
+                        </div>
+
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <div>
+                                    <div class="chart-title">توزیع کارها</div>
+                                    <div class="chart-subtitle">وضعیت فعلی</div>
+                                </div>
+                            </div>
+                            <div class="chart-body">
+                                <div id="overviewChart"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="heatmap-section">
+                        <div class="chart-header">
+                            <div>
+                                <div class="chart-title">نقشه فعالیت‌ها</div>
+                                <div class="chart-subtitle">120 روز گذشته</div>
+                            </div>
+                        </div>
+                        <div class="chart-body">
+                            <div id="heatmapContainer"></div>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin:20px 0 12px;">
+                        <div>
+                            <div style="font-size:14px; font-weight:600; color:var(--text-primary);">Insights</div>
+                            <div style="font-size:12px; color:var(--text-tertiary); margin-top:2px;">تحلیل هوشمند</div>
+                        </div>
+                    </div>
+                    <div class="insights-grid" id="insightsGrid"></div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Activity Timeline</div>
+                            <div class="card-link">View all</div>
+                        </div>
+                        <div class="activity-timeline" id="timeline"></div>
+                    </div>
+                </section>
+
+                <!-- ===== PEOPLE ===== -->
+                <section id="view-people" class="view">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">مخاطبان</h1>
+                            <div class="page-subtitle">مدیریت همه مخاطبان و مشتریان</div>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-secondary">فیلتر</button>
+                            <button class="btn btn-primary" onclick="openModal('people')">+ مخاطب جدید</button>
+                        </div>
+                    </div>
+
+                    <div class="data-table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>مخاطب</th>
+                                    <th>شرکت</th>
+                                    <th>تماس</th>
+                                    <th>وضعیت</th>
+                                    <th>تاریخ</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="peopleTableBody"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- ===== TASKS ===== -->
+                <section id="view-tasks" class="view">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">کارها</h1>
+                            <div class="page-subtitle">مدیریت وظایف به صورت Kanban یا تقویم</div>
+                        </div>
+                        <div class="page-actions">
+                            <div class="view-toggle" id="taskViewToggle">
+                                <button class="view-toggle-btn active" data-view="kanban" onclick="switchTaskView('kanban')">
+                                    <span id="kanbanViewIcon"></span>
+                                    <span>Kanban</span>
+                                </button>
+                                <button class="view-toggle-btn" data-view="week" onclick="switchTaskView('week')"><span id="weekViewIcon"></span><span>هفتگی</span></button>
+                                <button class="view-toggle-btn" data-view="calendar" onclick="switchTaskView('calendar')">
+                                    <span id="calendarViewIcon"></span>
+                                    <span>تقویم</span>
+                                </button>
+                            </div>
+                            <button class="btn btn-primary" onclick="openModal('tasks')">+ کار جدید</button>
+                        </div>
+                    </div>
+
+                    <!-- Kanban View -->
+                    <div id="kanbanView">
+                        <div class="filter-bar" id="taskFilterBar">
+                            <span style="font-size:12px; color:var(--text-tertiary); font-weight:500;">فیلتر:</span>
+                            <div class="filter-chip active" data-filter="all" onclick="filterTasks('all')">همه</div>
+                            <div class="filter-chip" data-filter="high" onclick="filterTasks('high')">اولویت بالا</div>
+                            <div class="filter-chip" data-filter="pending" onclick="filterTasks('pending')">در انتظار</div>
+                            <div class="filter-chip" data-filter="done" onclick="filterTasks('done')">انجام شده</div>
+                        </div>
+
+                        <div class="kanban" id="kanbanBoard"></div>
+                    </div>
+
+                    
+                    <!-- Week View -->
+                    <div id="weekView" style="display:none;">
+                        <div class="mobile-week-notice">
+                            📱 نمای هفتگی در موبایل در دسترس نیست
+                        </div>
+                        <div class="week-view-container">
+                            <div class="calendar-header">
+                                <div class="calendar-nav">
+                                    <button class="calendar-nav-btn" onclick="changeWeek(-1)" title="هفته قبل">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                    </button>
+                                    <button class="calendar-nav-btn" onclick="changeWeek(1)" title="هفته بعد">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                    </button>
+                                </div>
+                                <div class="calendar-title" id="weekTitle"></div>
+                                <button class="calendar-today-btn" onclick="goToThisWeek()">این هفته</button>
+                            </div>
+                            
+                            <div class="week-header" id="weekHeader"></div>
+                            <div class="week-body" id="weekBody"></div>
+                        </div>
+                    </div>
+                    <!-- Calendar View -->
+                    <div id="calendarView" style="display:none;">
+                        <div class="calendar-container">
+                            <div class="calendar-header">
+                                <div class="calendar-nav">
+                                    <button class="calendar-nav-btn" onclick="changeMonth(-1)" title="ماه قبل">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                    </button>
+                                    <button class="calendar-nav-btn" onclick="changeMonth(1)" title="ماه بعد">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                    </button>
+                                </div>
+                                <div class="calendar-title" id="calendarTitle"></div>
+                                <button class="calendar-today-btn" onclick="goToToday()">امروز</button>
+                            </div>
+                            
+                            <div class="calendar-grid" id="calendarWeekdays"></div>
+                            <div class="calendar-body" id="calendarBody"></div>
+                            
+                            <div class="calendar-footer">
+                                <div class="calendar-stats">
+                                    <div class="calendar-stat">
+                                        <div class="calendar-stat-dot" style="background:var(--danger);"></div>
+                                        <span id="statHighPriority">0</span> اولویت بالا
+                                    </div>
+                                    <div class="calendar-stat">
+                                        <div class="calendar-stat-dot" style="background:var(--warning);"></div>
+                                        <span id="statMediumPriority">0</span> متوسط
+                                    </div>
+                                    <div class="calendar-stat">
+                                        <div class="calendar-stat-dot" style="background:var(--success);"></div>
+                                        <span id="statLowPriority">0</span> کم
+                                    </div>
+                                </div>
+                                <div id="calendarTaskCount">0 کار در این ماه</div>
+                            </div>
+                        </div>
+
+                        <!-- Day Detail Panel -->
+                        <div id="dayDetailPanel" style="display:none;"></div>
+                    </div>
+                </section>
+
+                <!-- ===== IDEAS ===== -->
+                <section id="view-ideas" class="view">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">ایده‌ها</h1>
+                            <div class="page-subtitle">مجموعه ایده‌ها و فکرها</div>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-primary" onclick="openModal('ideas')">+ ایده جدید</button>
+                        </div>
+                    </div>
+                    <div class="cards-grid" id="ideasGrid"></div>
+                </section>
+
+                <!-- ===== NOTES ===== -->
+                <section id="view-notes" class="view">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">یادداشت‌ها</h1>
+                            <div class="page-subtitle">یادداشت‌های شخصی و کاری</div>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-primary" onclick="openModal('notes')">+ یادداشت جدید</button>
+                        </div>
+                    </div>
+                    <div class="cards-grid" id="notesGrid"></div>
+                </section>
+
+                <!-- ===== PROJECTS ===== -->
+                <section id="view-projects" class="view">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">پروژه‌ها</h1>
+                            <div class="page-subtitle">مدیریت پروژه‌های فعال</div>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-primary" onclick="openModal('projects')">+ پروژه جدید</button>
+                        </div>
+                    </div>
+                    <div class="cards-grid" id="projectsGrid"></div>
+                </section>
+
+                <!-- ===== BACKUPS ===== -->
+                <section id="view-backups" class="view">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">مدیریت پشتیبان‌ها</h1>
+                            <div class="page-subtitle">ایجاد، مدیریت و بازیابی نسخه‌های پشتیبان</div>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-primary" onclick="createBackup()">
+                                <span>+</span>
+                                <span>ایجاد پشتیبان جدید</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom:24px;">
+                        <div style="font-size:14px; font-weight:600; color:var(--text-primary); margin-bottom:12px;">خروجی و ورودی داده‌ها</div>
+                        <div class="export-grid" id="exportGrid"></div>
+                    </div>
+
+                    <div style="font-size:14px; font-weight:600; color:var(--text-primary); margin-bottom:12px;">نسخه‌های پشتیبان</div>
+                    <div class="backup-list" id="backupList"></div>
+                </section>
+
+                <!-- ===== SETTINGS ===== -->
+                                                <!-- Knowledge Graph View -->
+                <section id="view-graph" class="view">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">گراف دانش</h1>
+                            <div class="page-subtitle">شبکه ارتباط بین یادداشت‌ها و ایده‌ها — خودکار از اتصال‌های شما</div>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-primary" onclick="openModal('notes')">+ یادداشت جدید</button>
+                        </div>
+                    </div>
+                    <div class="graph-container" id="graphContainer"></div>
+                </section>
+                <!-- Reports View -->
+                <section id="view-reports" class="view">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">گزارش‌ها</h1>
+                            <div class="page-subtitle">ایجاد و چاپ گزارش‌های حرفه‌ای</div>
+                        </div>
+                    </div>
+
+                    <div class="reports-container">
+                        <div class="reports-sidebar">
+                            <div class="reports-sidebar-title">نوع گزارش</div>
+                            <div class="report-type-list" id="reportTypeList">
+                                <div class="report-type-item active" data-type="overview" onclick="selectReportType('overview')">
+                                    <div class="report-type-icon" id="iconOverview"></div>
+                                    <span>گزارش کلی</span>
+                                </div>
+                                <div class="report-type-item" data-type="tasks" onclick="selectReportType('tasks')">
+                                    <div class="report-type-icon" id="iconTasks"></div>
+                                    <span>گزارش کارها</span>
+                                </div>
+                                <div class="report-type-item" data-type="people" onclick="selectReportType('people')">
+                                    <div class="report-type-icon" id="iconPeople"></div>
+                                    <span>گزارش مخاطبان</span>
+                                </div>
+                                <div class="report-type-item" data-type="overdue" onclick="selectReportType('overdue')">
+                                    <div class="report-type-icon" id="iconOverdue"></div>
+                                    <span>کارهای عقب‌افتاده</span>
+                                </div>
+                                <div class="report-type-item" data-type="activity" onclick="selectReportType('activity')">
+                                    <div class="report-type-icon" id="iconActivity"></div>
+                                    <span>گزارش فعالیت‌ها</span>
+                                </div>
+                                <div class="report-type-item" data-type="weekly" onclick="selectReportType('weekly')">
+                                    <div class="report-type-icon" id="iconWeekly"></div>
+                                    <span>گزارش هفتگی</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="reports-main">
+                            <div class="reports-filters" id="reportsFilters">
+                                <div class="reports-filter-group">
+                                    <span class="reports-filter-label">بازه زمانی:</span>
+                                    <select class="form-select" id="reportDateRange" onchange="generateReport()" style="width: 140px;">
+                                        <option value="all">همه زمان‌ها</option>
+                                        <option value="today">امروز</option>
+                                        <option value="week">این هفته</option>
+                                        <option value="month" selected>این ماه</option>
+                                        <option value="year">امسال</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="print-actions" id="printActions" style="display:none;">
+                                <button class="print-btn primary" onclick="printReport()">
+                                    🖨️ چاپ / ذخیره PDF
+                                </button>
+                                <button class="print-btn" onclick="generateReport()">
+                                    🔄 بازتولید
+                                </button>
+                            </div>
+
+                            <div class="report-preview" id="reportPreview">
+                                <div class="report-empty">
+                                    <div class="report-empty-icon">📊</div>
+                                    <div class="report-empty-title">آماده برای تولید گزارش</div>
+                                    <div class="report-empty-desc">
+                                        از لیست سمت راست نوع گزارش را انتخاب کنید تا پیش‌نمایش آن نمایش داده شود.
+                                        سپس می‌توانید آن را چاپ کرده یا به صورت PDF ذخیره کنید.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="view-settings" class="view">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">تنظیمات</h1>
+                            <div class="page-subtitle">پیکربندی اپلیکیشن و ترجیحات</div>
+                        </div>
+                    </div>
+
+                    <div class="settings-grid">
+                        <div class="settings-nav">
+                            <div class="settings-nav-item active" data-tab="general">عمومی</div>
+                            <div class="settings-nav-item" data-tab="backup">پشتیبان‌گیری</div>
+                            <div class="settings-nav-item" data-tab="appearance">ظاهر</div>
+                            <div class="settings-nav-item" data-tab="about">درباره</div>
+                        </div>
+
+                        <div class="settings-content">
+                            <div class="settings-tab active" data-tab="general">
+                                <div class="settings-section">
+                                    <div class="settings-section-title">عمومی</div>
+                                    <div class="settings-section-desc">تنظیمات کلی اپلیکیشن</div>
+                                    <div class="setting-row">
+                                        <div class="setting-info">
+                                            <div class="setting-label">زبان رابط کاربری</div>
+                                            <div class="setting-desc">زبان نمایش اپلیکیشن</div>
+                                        </div>
+                                        <select class="form-select" style="width:140px;"><option>فارسی</option></select>
+                                    </div>
+                                    <div class="setting-row">
+                                        <div class="setting-info">
+                                            <div class="setting-label">جهت متن</div>
+                                            <div class="setting-desc">راست به چپ برای فارسی</div>
+                                        </div>
+                                        <select class="form-select" style="width:140px;"><option>RTL</option><option>LTR</option></select>
+                                    </div>
+                                </div>
+                                <div class="settings-section">
+                                    <div class="settings-section-title">اطلاع‌رسانی</div>
+                                    <div class="setting-row">
+                                        <div class="setting-info">
+                                            <div class="setting-label">اعلان‌های Toast</div>
+                                            <div class="setting-desc">نمایش پیام‌های تایید</div>
+                                        </div>
+                                        <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="settings-tab" data-tab="backup" style="display:none;">
+                                <div class="settings-section">
+                                    <div class="settings-section-title">پشتیبان‌گیری خودکار</div>
+                                    <div class="setting-row">
+                                        <div class="setting-info">
+                                            <div class="setting-label">بکاپ خودکار</div>
+                                            <div class="setting-desc">بکاپ روزانه از داده‌ها</div>
+                                        </div>
+                                        <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+                                    </div>
+                                    <div class="setting-row">
+                                        <div class="setting-info">
+                                            <div class="setting-label">حفظ نسخه‌ها</div>
+                                            <div class="setting-desc">تعداد نسخه‌های نگهداری شده</div>
+                                        </div>
+                                        <select class="form-select" style="width:140px;"><option>5 نسخه</option><option>10 نسخه</option><option>30 نسخه</option></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="settings-tab" data-tab="appearance" style="display:none;">
+                                <div class="settings-section">
+                                    <div class="settings-section-title">ظاهر اپلیکیشن</div>
+                                    <div class="setting-row">
+                                        <div class="setting-info">
+                                            <div class="setting-label">تم رنگی</div>
+                                            <div class="setting-desc">حالت تاریک (پیش‌فرض)</div>
+                                        </div>
+                                        <select class="form-select" style="width:140px;"><option>تاریک</option><option>روشن</option></select>
+                                    </div>
+                                    <div class="setting-row">
+                                        <div class="setting-info">
+                                            <div class="setting-label">انیمیشن‌ها</div>
+                                            <div class="setting-desc">فعال‌سازی حرکات نرم</div>
+                                        </div>
+                                        <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="settings-tab" data-tab="about" style="display:none;">
+                                <div class="settings-section">
+                                    <div class="settings-section-title">CRM Pro</div>
+                                    <div class="settings-section-desc">سیستم مدیریت ارتباط با مشتری - نسخه محلی</div>
+                                    <div class="setting-row">
+                                        <div class="setting-info">
+                                            <div class="setting-label">نسخه</div>
+                                            <div class="setting-desc">1.0.0 (Phase 6)</div>
+                                        </div>
+                                    </div>
+                                    <div class="setting-row">
+                                        <div class="setting-info">
+                                            <div class="setting-label">ساخته شده با</div>
+                                            <div class="setting-desc">PowerShell, HTML, CSS, JavaScript</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== INBOX ===== -->
+                                <!-- Inbox View (Professional) -->
+                <section id="view-inbox" class="view">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">Inbox</h1>
+                            <div class="page-subtitle">مرکز پردازش — همه موارد نیاز به توجه در یک جا</div>
+                        </div>
+                    </div>
+
+                    <div class="inbox-capture">
+                        <span style="font-size:18px;">⚡</span>
+                        <input id="inboxCaptureInput" placeholder="افزودن سریع: «فردا ساعت 3 تماس با علی» — Enter بزن"/>
+                        <button class="btn btn-primary" onclick="inboxCapture()">افزودن</button>
+                    </div>
+
+                    <div id="inboxList"></div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- ===== OVERLAYS ===== -->
+    <div class="context-menu" id="contextMenu"></div>
+
+    <div class="confirm-overlay" id="confirmOverlay">
+        <div class="confirm-dialog">
+            <div class="confirm-icon" id="confirmIcon"></div>
+            <div class="confirm-title" id="confirmTitle">آیا مطمئن هستید؟</div>
+            <div class="confirm-message" id="confirmMessage">این عمل قابل بازگشت نیست.</div>
+            <div class="confirm-actions">
+                <button class="btn btn-ghost" onclick="closeConfirm()">انصراف</button>
+                <button class="btn btn-danger" id="confirmBtn">حذف</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="cmd-overlay" id="cmdOverlay" onclick="closeCommandPalette()">
+        <div class="cmd-palette" onclick="event.stopPropagation()">
+            <div class="cmd-search">
+                <span id="cmdSearchIcon"></span>
+                <input type="text" id="cmdInput" placeholder="جستجو در همه..." oninput="searchCommand(this.value)" />
+                <span class="kbd">ESC</span>
+            </div>
+            <div class="cmd-results" id="cmdResults"></div>
+            <div class="cmd-footer">
+                <div class="cmd-footer-hint"><span class="kbd">↑</span><span class="kbd">↓</span><span>نویگیشن</span></div>
+                <div class="cmd-footer-hint"><span class="kbd">↵</span><span>انتخاب</span></div>
+                <div class="cmd-footer-hint"><span class="kbd">Esc</span><span>بستن</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-overlay" id="panelOverlay" onclick="closePanel()"></div>
+    <div class="slide-panel" id="slidePanel">
+        <div class="panel-header">
+            <div class="panel-title" id="panelTitle">جزئیات</div>
+            <button class="icon-button" onclick="closePanel()"><span></span></button>
+        </div>
+        <div class="panel-body" id="panelBody"></div>
+        <div class="panel-actions" id="panelActions"></div>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTitle">افزودن جدید</div>
+                <button class="icon-button" onclick="closeModal()"><span></span></button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeModal()">انصراف</button>
+                <button class="btn btn-primary" id="modalSubmit">ذخیره</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="js/icons.js?v=20260808214859"></script>
+    <script src="js/charts.js?v=20260808214859"></script>
+    <script src="js/holidays.js?v=20260808214859"></script>`n    <script src="js/core.js"></script>
+    <script src="js/calendar.js"></script>
+    <script src="js/reports.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/backup.js"></script>
+    <script src="js/relationships.js"></script>
+    <script src="js/smart.js"></script>
+    <script src="js/graph.js"></script>
+    <script src="js/gamification.js"></script>
+    <script src="js/vault.js"></script>
+    <script src="js/wrapped.js"></script>
+    <script src="js/inbox.js"></script>
+    <script src="js/inbox-design.js"></script>
+    <script src="js/inbox-pro.js"></script>
+    <script src="js/inbox-zen.js"></script>
+    <script src="js/dashboard-pro.js"></script>
+
+    <script>
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((reg) => {
+                        console.log('SW registered:', reg);
+                        
+                        // Check for updates periodically
+                        setInterval(() => {
+                            reg.update();
+                        }, 60 * 60 * 1000); // Every hour
+                    })
+                    .catch((err) => console.error('SW registration failed:', err));
+            });
+        }
+        
+        // PWA Install Prompt
+        let deferredPrompt;
+        const installBtn = document.getElementById('installBtn');
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('beforeinstallprompt fired');
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            if (installBtn) {
+                installBtn.style.display = 'flex';
+                installBtn.querySelector('span').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
+            }
+        });
+        
+        if (installBtn) {
+            installBtn.addEventListener('click', async () => {
+                if (!deferredPrompt) {
+                    if (typeof toast === 'function') {
+                        toast('برای نصب، از منوی مرورگر گزینه "Install app" را انتخاب کنید', 'info');
+                    }
+                    return;
+                }
+                
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                
+                if (outcome === 'accepted') {
+                    if (typeof toast === 'function') {
+                        toast('اپلیکیشن با موفقیت نصب شد!', 'success');
+                    }
+                }
+                
+                deferredPrompt = null;
+                installBtn.style.display = 'none';
+            });
+        }
+        
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA was installed');
+            if (typeof toast === 'function') {
+                toast('CRM Pro نصب شد! می‌توانید از دسکتاپ باز کنید', 'success');
+            }
+            if (installBtn) installBtn.style.display = 'none';
+        });
+    </script>
+
+    <script>
+        // Request notification permission
+        if ('Notification' in window && Notification.permission === 'default') {
+            Notification.requestPermission();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{
+    "app":  {
+                "name":  "Local CRM Todo",
+                "version":  "0.1.0",
+                "language":  "fa",
+                "direction":  "rtl",
+                "offline":  true,
+                "createdAtUtc":  "2026-08-07T19:36:20.3892118Z"
+            },
+    "storage":  {
+                    "mode":  "json",
+                    "dataFolder":  "data",
+                    "attachmentsFolder":  "data/attachments",
+                    "backupFolder":  "backups",
+                    "logsFolder":  "logs"
+                },
+    "modules":  [
+                    "people",
+                    "tasks",
+                    "ideas",
+                    "notes",
+                    "projects",
+                    "interactions",
+                    "tags",
+                    "settings",
+                    "activity_logs",
+                    "dashboard"
+                ],
+    "roadmap":  {
+                    "phase1":  "scaffold",
+                    "phase2":  "storage-core",
+                    "phase3":  "local-server",
+                    "phase4":  "ui-crud",
+                    "phase5":  "analytics-dashboard",
+                    "phase6":  "backup-restore",
+                    "phase7":  "advanced-features"
+                }
+}
