@@ -7172,3 +7172,96 @@ body {
     border-radius: 999px;
     z-index: 5;
 }
+
+
+/* ===== PHASE 22: PRO LAYOUT (Bento + Hierarchy) ===== */
+
+/* 1) Asymmetric bento spans (no more uniform bricks) */
+.focus-suite { grid-template-columns: 1.5fr 0.95fr 1.05fr; align-items: stretch; }
+.vitals-row { grid-template-columns: 0.9fr 1.3fr 1fr; }
+.charts-grid { grid-template-columns: 1.6fr 1fr; }
+.ambient-row { grid-template-columns: 0.9fr 1.4fr; }
+
+/* 2) Featured focal card (Today) */
+.focus-today {
+    background: linear-gradient(160deg, rgba(124,58,237,0.12), rgba(236,72,153,0.06) 50%, var(--bg-surface));
+    border: 1px solid rgba(124,58,237,0.35);
+    box-shadow: 0 10px 40px -12px rgba(124,58,237,0.35);
+}
+
+/* 3) KPI Strip (Stripe-style): one card, internal dividers, no bricks */
+.stats-grid-v2 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0 !important;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 0;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.stat-card-v2 {
+    border: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    border-left: 1px solid var(--border-subtle) !important;
+    padding: 18px 22px;
+    transform: none !important;
+    box-shadow: none !important;
+    transition: background 0.2s;
+}
+
+.stat-card-v2:first-child { border-left: none !important; }
+.stat-card-v2:hover { background: var(--bg-hover); }
+.stat-card-v2::after { display: none; }
+
+/* 4) Zone headers (semantic grouping) */
+.zone-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin: 28px 0 12px;
+}
+
+.zone-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to left, transparent, var(--border-subtle));
+}
+
+#view-dashboard.customizing .zone-label { display: none; }
+
+/* 5) De-brick: softer borders, rely on depth not lines */
+.focus-widget, .vital-card, .chart-card, .ambient-card,
+#view-dashboard .card, .heatmap-section {
+    border-color: rgba(255,255,255,0.05);
+    background: linear-gradient(180deg, var(--bg-surface), rgba(255,255,255,0.01));
+}
+
+/* 6) Constrain width for professional reading line */
+#view-dashboard { max-width: 1500px; margin: 0 auto; }
+
+/* 7) Responsive bento collapse */
+@media (max-width: 1200px) {
+    .focus-suite { grid-template-columns: 1fr 1fr; }
+    .focus-today { grid-column: 1 / -1; }
+    .vitals-row { grid-template-columns: 1fr 1fr; }
+    .vital-card:nth-child(2) { grid-column: 1 / -1; }
+    .charts-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 800px) {
+    .focus-suite, .vitals-row, .ambient-row { grid-template-columns: 1fr; }
+    .stats-grid-v2 { grid-template-columns: 1fr 1fr; }
+    .stat-card-v2:nth-child(3) { border-left: none; }
+    .stat-card-v2 { border-top: 1px solid var(--border-subtle); }
+    .stat-card-v2:nth-child(-n+2) { border-top: none; }
+}
