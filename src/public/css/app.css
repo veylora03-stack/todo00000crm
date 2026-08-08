@@ -7589,3 +7589,114 @@ body {
 /* 5) clickable insights */
 .insight-card { cursor: pointer; }
 .card-link { cursor: pointer; color: var(--accent); }
+
+
+/* ===== DASHBOARD-AS-A-SERVICE CSS ===== */
+
+/* Widget menu button */
+.widget-menu-btn {
+    background: none;
+    border: none;
+    color: var(--text-tertiary);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    margin-left: auto;
+}
+.widget-menu-btn:hover { color: var(--accent); background: var(--accent-subtle); }
+
+.widget-menu {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: 6px;
+    z-index: 10000;
+    min-width: 160px;
+}
+.widget-menu-item {
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-secondary);
+    transition: all 0.15s;
+}
+.widget-menu-item:hover { background: var(--accent-subtle); color: var(--accent); }
+
+/* Quick Start */
+.qs-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 99998;
+}
+.qs-highlight {
+    position: fixed;
+    border: 3px solid var(--accent);
+    border-radius: var(--radius-md);
+    box-shadow: 0 0 0 9999px rgba(0,0,0,0.7);
+    z-index: 99999;
+    animation: qsPulse 2s ease-in-out infinite;
+}
+@keyframes qsPulse {
+    0%, 100% { box-shadow: 0 0 0 9999px rgba(0,0,0,0.7), 0 0 20px var(--accent); }
+    50% { box-shadow: 0 0 0 9999px rgba(0,0,0,0.7), 0 0 40px var(--accent); }
+}
+.qs-card {
+    position: fixed;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    box-shadow: var(--shadow-lg);
+    max-width: 320px;
+    z-index: 100000;
+    animation: qsSlideUp 0.3s ease;
+}
+@keyframes qsSlideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: none; }
+}
+.qs-card-title { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+.qs-card-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px; }
+.qs-card-actions { display: flex; gap: 8px; }
+.qs-card-progress { font-size: 11px; color: var(--text-tertiary); margin-top: 12px; text-align: center; }
+
+/* Light theme */
+body.light-theme {
+    --bg-base: #fafafa;
+    --bg-surface: #ffffff;
+    --bg-surface-2: #f5f5f5;
+    --bg-surface-3: #e5e5e5;
+    --text-primary: #1a1a1a;
+    --text-secondary: #525252;
+    --text-tertiary: #a3a3a3;
+    --border-default: #d4d4d4;
+    --border-subtle: #e5e5e5;
+    background: var(--bg-base);
+    color: var(--text-primary);
+}
+
+body.light-theme .topbar {
+    background: rgba(250,250,250,0.9);
+    border-bottom-color: var(--border-subtle);
+}
+
+body.light-theme .nav-link.active {
+    background: var(--accent-subtle);
+}
+
+/* Heatmap interaction */
+#heatmapContainer [data-date] { cursor: pointer; transition: all 0.2s; }
+#heatmapContainer [data-date]:hover { transform: scale(1.1); outline: 2px solid var(--accent); }
+
+/* Timeline interaction */
+.timeline-item { cursor: pointer; transition: all 0.2s; }
+.timeline-item:hover { background: var(--bg-surface-2); }
+
+/* Insights interaction */
+.insight-card { cursor: pointer; transition: all 0.2s; }
+.insight-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
