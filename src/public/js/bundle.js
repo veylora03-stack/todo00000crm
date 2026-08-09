@@ -1,51 +1,6 @@
-// ===== CRM PRO BUNDLE (auto-generated) =====
-// Build: 2026-08-09 10:31:13
-// Modules: bus.js, core.js, calendar.js, reports.js, notifications.js, backup.js, relationships.js, smart.js, graph.js, gamification.js, vault.js, wrapped.js, inbox.js, inbox-design.js, inbox-pro.js, inbox-zen.js, dashboard-pro.js, focus-suite.js, command-hub.js, vitals.js, ambient.js, customize.js, layout-pro.js, topbar-pro.js, dashboard-qa.js, context.js, widget-export.js, widget-interactions.js, quick-start.js, ai-insights.js, mobile.js, pipeline.js, companies.js, projects-pro.js, automation.js, okr.js, global-search.js
+// CRM PRO BUNDLE (auto) 2026-08-09 11:03
 
-
-/* ========== bus.js ========== */
-// ===== EVENT BUS (Phase 32) - central pub/sub =====
-// هدف: حذف زنجیره window.wrap ها؛ ماژول‌ها به جای wrap، subscribe می‌کنند.
-const bus = (() => {
-    const map = new Map();
-    return {
-        on(event, cb) {
-            if (!map.has(event)) map.set(event, []);
-            map.get(event).push(cb);
-            return () => map.set(event, map.get(event).filter(f => f !== cb));
-        },
-        once(event, cb) {
-            const off = this.on(event, d => { off(); cb(d); });
-        },
-        emit(event, data) {
-            (map.get(event) || []).forEach(cb => {
-                try { cb(data); } catch (e) { console.warn('[bus]', event, e); }
-            });
-        }
-    };
-})();
-
-// Central tick scheduler (یک تایمر مرکزی به جای چند setInterval)
-setInterval(() => bus.emit('tick:1s'), 1000);
-setInterval(() => bus.emit('tick:30s'), 30000);
-setInterval(() => bus.emit('tick:60s'), 60000);
-
-// شروع مهاجرت: انتشار رویدادهای اصلی (بدون حذف wrap های فعلی)
-const _origLoadAllDataBus = window.loadAllData;
-window.loadAllData = async function() {
-    const r = await _origLoadAllDataBus();
-    bus.emit('data:loaded', currentData);
-    return r;
-};
-const _origSwitchViewBus = window.switchView;
-window.switchView = function(v) {
-    _origSwitchViewBus(v);
-    bus.emit('view:changed', v);
-};
-
-console.log('[Bus] Event bus + central tick loaded');
-
-/* ========== core.js ========== */
+/* === core.js === */
 // ===== CORE MODULE =====
 const API = window.location.origin;
 let currentView = 'dashboard';
@@ -553,7 +508,49 @@ function toast(message, type) {
     setTimeout(() => { t.classList.add('removing'); setTimeout(() => t.remove(), 200); }, 3000);
 }
 
-/* ========== calendar.js ========== */
+/* === bus.js === */
+// ===== EVENT BUS (Phase 32) - central pub/sub =====
+// هدف: حذف زنجیره window.wrap ها؛ ماژول‌ها به جای wrap، subscribe می‌کنند.
+const bus = (() => {
+    const map = new Map();
+    return {
+        on(event, cb) {
+            if (!map.has(event)) map.set(event, []);
+            map.get(event).push(cb);
+            return () => map.set(event, map.get(event).filter(f => f !== cb));
+        },
+        once(event, cb) {
+            const off = this.on(event, d => { off(); cb(d); });
+        },
+        emit(event, data) {
+            (map.get(event) || []).forEach(cb => {
+                try { cb(data); } catch (e) { console.warn('[bus]', event, e); }
+            });
+        }
+    };
+})();
+
+// Central tick scheduler (یک تایمر مرکزی به جای چند setInterval)
+setInterval(() => bus.emit('tick:1s'), 1000);
+setInterval(() => bus.emit('tick:30s'), 30000);
+setInterval(() => bus.emit('tick:60s'), 60000);
+
+// شروع مهاجرت: انتشار رویدادهای اصلی (بدون حذف wrap های فعلی)
+const _origLoadAllDataBus = window.loadAllData;
+window.loadAllData = async function() {
+    const r = await _origLoadAllDataBus();
+    bus.emit('data:loaded', currentData);
+    return r;
+};
+const _origSwitchViewBus = window.switchView;
+window.switchView = function(v) {
+    _origSwitchViewBus(v);
+    bus.emit('view:changed', v);
+};
+
+console.log('[Bus] Event bus + central tick loaded');
+
+/* === calendar.js === */
 // ===== CALENDAR MODULE =====
 let currentTaskView = 'kanban';
 let currentCalendarDate = new Date();
@@ -943,7 +940,7 @@ setTimeout(() => {
 
 console.log('[Calendar] Module loaded');
 
-/* ========== reports.js ========== */
+/* === reports.js === */
 // ===== REPORTS MODULE =====
 let currentReportType = 'overview';
 
@@ -1110,7 +1107,7 @@ function injectReportIcons() {
 setTimeout(injectReportIcons, 300);
 console.log('[Reports] Module loaded');
 
-/* ========== notifications.js ========== */
+/* === notifications.js === */
 // ===== NOTIFICATIONS MODULE =====
 let notificationInterval = null;
 let currentNotifications = [];
@@ -1241,7 +1238,7 @@ function setReminder(el, minutes) {
 setTimeout(initNotifications, 500);
 console.log('[Notifications] Module loaded');
 
-/* ========== backup.js ========== */
+/* === backup.js === */
 // ===== BACKUP MODULE =====
 async function loadBackups() {
     const l = document.getElementById('backupList');
@@ -1423,7 +1420,7 @@ async function deleteAttachment(aid, et, eid) {
 
 console.log('[Backup] Module loaded');
 
-/* ========== relationships.js ========== */
+/* === relationships.js === */
 // ===== RELATIONSHIPS MODULE (Phase 10) =====
 const FREQ_DAYS = { weekly: 7, monthly: 30, quarterly: 90 };
 const FREQ_LABELS = { weekly: 'هفتگی', monthly: 'ماهانه', quarterly: 'فصلی', none: 'بدون یادآوری' };
@@ -1629,7 +1626,7 @@ setTimeout(async () => {
 
 console.log('[Relationships] Module loaded');
 
-/* ========== smart.js ========== */
+/* === smart.js === */
 // ===== SMART MODULE (Phase 11) =====
 
 // ---------- Natural Language Parser (Persian) ----------
@@ -1800,7 +1797,7 @@ window.renderWeekView = function () {
 setTimeout(injectSmartBar, 400);
 console.log('[Smart] Module loaded (NLP + Time Blocking)');
 
-/* ========== graph.js ========== */
+/* === graph.js === */
 // ===== KNOWLEDGE LINKS - SIMPLE VERSION (Phase 12 v2) =====
 // No syntax needed! Just click to connect.
 
@@ -2038,7 +2035,7 @@ setTimeout(() => {
 
 console.log('[KnowledgeLinks] SIMPLE version loaded');
 
-/* ========== gamification.js ========== */
+/* === gamification.js === */
 // ===== GAMIFICATION MODULE (Phase 13) =====
 
 const ACHIEVEMENTS = [
@@ -2294,7 +2291,7 @@ setTimeout(() => {
 
 console.log('[Gamification] Module loaded');
 
-/* ========== vault.js ========== */
+/* === vault.js === */
 // ===== VAULT MODULE (Phase 14) =====
 
 const VAULT_HASH_KEY = 'crm_vault_hash';
@@ -2438,7 +2435,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 console.log('[Vault] Module loaded');
 
-/* ========== wrapped.js ========== */
+/* === wrapped.js === */
 // ===== WRAPPED MODULE (Phase 14) =====
 
 let wrappedCurrentSlide = 0;
@@ -2613,7 +2610,7 @@ setTimeout(addWrappedSettings, 800);
 
 console.log('[Wrapped] Module loaded');
 
-/* ========== inbox.js ========== */
+/* === inbox.js === */
 // ===== PROFESSIONAL INBOX MODULE (Phase 15) =====
 let inboxItems = [];
 let inboxSelectedIndex = -1;
@@ -2873,7 +2870,7 @@ setTimeout(() => { renderInbox(); }, 800);
 
 console.log('[Inbox] Professional module loaded');
 
-/* ========== inbox-design.js ========== */
+/* === inbox-design.js === */
 // ===== INBOX DESIGN v2 - Beautiful Rendering =====
 
 window.renderInbox = function () {
@@ -2944,7 +2941,7 @@ window.renderInbox = function () {
 
 console.log('[InboxDesign] Beautiful rendering loaded');
 
-/* ========== inbox-pro.js ========== */
+/* === inbox-pro.js === */
 // ===== INBOX GOD MODE (Phase 15.3) =====
 let inboxMaster = [];
 let inboxFilter = 'all';
@@ -3176,7 +3173,7 @@ function showShortcutHelp() {
 
 console.log('[InboxGod] GOD MODE loaded');
 
-/* ========== inbox-zen.js ========== */
+/* === inbox-zen.js === */
 // ===== ZEN MODE + PARTICLES + WORKLOAD (Phase 15.4) =====
 
 // ---------- Workload estimate ----------
@@ -3395,7 +3392,7 @@ document.addEventListener('keydown', e => {
 
 console.log('[InboxZen] Zen + Particles + Workload loaded');
 
-/* ========== dashboard-pro.js ========== */
+/* === dashboard-pro.js === */
 // ===== DASHBOARD GOD MODE (Phase 16) =====
 
 // ---------- 3D Tilt ----------
@@ -3525,7 +3522,7 @@ window.renderDashboard = function () {
 
 console.log('[DashboardGod] GOD MODE loaded');
 
-/* ========== focus-suite.js ========== */
+/* === focus-suite.js === */
 // ===== FOCUS SUITE MODULE (Phase 17) =====
 // Today's Focus + Pomodoro + Time Blocks
 
@@ -3950,7 +3947,7 @@ window.loadAllData = async function() {
 
 console.log('[FocusSuite] Today Focus + Pomodoro + Time Blocks loaded');
 
-/* ========== command-hub.js ========== */
+/* === command-hub.js === */
 // ===== COMMAND HUB MODULE (Phase 18) =====
 
 const QUICK_ACTIONS = [
@@ -4012,7 +4009,7 @@ window.renderDashboard = function() {
 
 console.log('[CommandHub] Smart Search + Quick Actions loaded');
 
-/* ========== vitals.js ========== */
+/* === vitals.js === */
 // ===== VITALS ROW MODULE (Phase 19) =====
 
 function thisWeekStart() {
@@ -4249,7 +4246,7 @@ window.loadAllData = async function() {
 
 console.log('[Vitals] Energy + Goals + Relationship loaded');
 
-/* ========== ambient.js ========== */
+/* === ambient.js === */
 // ===== AMBIENT SUITE MODULE (Phase 20) =====
 
 // ---------- QUOTES ----------
@@ -4483,7 +4480,7 @@ window.renderDashboard = function() {
 
 console.log('[Ambient] AI + Weather + Quote loaded');
 
-/* ========== customize.js ========== */
+/* === customize.js === */
 // ===== CUSTOMIZABLE DASHBOARD MODULE (Phase 21) =====
 
 const CW_DEFAULT_ORDER = ['commandHub', 'focusSuite', 'vitalsRow', 'ambientRow', 'statsGrid', 'chartsGrid', 'heatmap', 'insights', 'relWidgets', 'achievements', 'timeline'];
@@ -4693,7 +4690,7 @@ window.renderDashboard = function() {
 
 console.log('[Customize] Draggable dashboard loaded');
 
-/* ========== layout-pro.js ========== */
+/* === layout-pro.js === */
 // ===== PRO LAYOUT MODULE (Phase 22) =====
 function injectZoneLabels() {
     const view = document.getElementById('view-dashboard');
@@ -4727,7 +4724,7 @@ window.renderDashboard = function() {
 
 console.log('[ProLayout] Bento + zones loaded');
 
-/* ========== topbar-pro.js ========== */
+/* === topbar-pro.js === */
 // ===== ULTRA TOPBAR MODULE (Phase 23.5) =====
 const TB_SVG = {
     bell: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>',
@@ -4810,7 +4807,7 @@ setTimeout(() => {
 }, 300);
 
 
-/* ========== dashboard-qa.js ========== */
+/* === dashboard-qa.js === */
 // ===== DASHBOARD QA MODULE (Phase 24) =====
 
 // ---------- 1) Reorder: KPI right after commandHub ----------
@@ -5004,7 +5001,7 @@ window.renderDashboard = function() {
 setTimeout(() => { qaApplyOrder(); syncZoneLabels(); }, 400);
 console.log('[DashboardQA] 8 fixes loaded');
 
-/* ========== context.js ========== */
+/* === context.js === */
 // ===== CONTEXT ENGINE - Reactive State Management =====
 const $context = (() => {
     const state = {
@@ -5128,7 +5125,7 @@ setTimeout(applyTheme, 100);
 
 console.log('[Context Engine] Reactive state management loaded');
 
-/* ========== widget-export.js ========== */
+/* === widget-export.js === */
 // ===== WIDGET EXPORT SYSTEM =====
 function addWidgetMenu(widgetEl, widgetId, dataFn) {
     if (widgetEl.querySelector('.widget-menu-btn')) return;
@@ -5194,7 +5191,7 @@ function injectWidgetMenus() {
 setTimeout(injectWidgetMenus, 500);
 console.log('[Widget Export] Menus injected');
 
-/* ========== widget-interactions.js ========== */
+/* === widget-interactions.js === */
 // ===== WIDGET INTERACTIONS =====
 // Heatmap click → select date → filter Today's Focus
 function enableHeatmapInteraction() {
@@ -5264,7 +5261,7 @@ setTimeout(() => {
 
 console.log('[Interactions] Widget interactions enabled');
 
-/* ========== quick-start.js ========== */
+/* === quick-start.js === */
 // ===== QUICK START GUIDE =====
 const QS_STEPS = [
     { target: '.analytics-hero', title: '👋 خوش آمدید!', desc: 'اینجا خلاصه‌ی روز شماست. ساعت زنده + آمار کلی.' },
@@ -5333,7 +5330,7 @@ setTimeout(() => {
 
 console.log('[QuickStart] Guide loaded');
 
-/* ========== ai-insights.js ========== */
+/* === ai-insights.js === */
 // ===== AI INSIGHTS ENGINE (Phase 26) - Offline, rule-based =====
 
 function aiDismissed() {
@@ -5502,7 +5499,7 @@ window.renderDashboard = function() {
 setTimeout(renderAiBar, 600);
 console.log('[AI Insights] Engine loaded');
 
-/* ========== mobile.js ========== */
+/* === mobile.js === */
 // ===== MOBILE MODULE (Phase 27) =====
 const MOBILE_NAV = [
     { view: 'dashboard', icon: '🏠', label: 'خانه' },
@@ -5592,7 +5589,7 @@ setTimeout(injectMobile, 400);
 window.addEventListener('resize', () => { if (!isMobile()) document.body.classList.remove('sidebar-open'); });
 console.log('[Mobile] Bottom nav + drawer + swipe loaded');
 
-/* ========== pipeline.js ========== */
+/* === pipeline.js === */
 // ===== PIPELINE MODULE (Phase 28) =====
 const DEAL_STAGES = [
     { key: 'lead', label: 'سرنخ', color: '#8b5cf6' },
@@ -5732,7 +5729,7 @@ setTimeout(() => {
 
 console.log('[Pipeline] Sales pipeline loaded');
 
-/* ========== companies.js ========== */
+/* === companies.js === */
 // ===== COMPANIES MODULE (Phase 29) =====
 function companyMembers(cid) { return (currentData.people || []).filter(p => p.companyId === cid); }
 function companyDeals(cid) {
@@ -5905,7 +5902,7 @@ async function removePersonTag(id, tag) {
 setTimeout(() => { document.querySelectorAll('.nav-link').forEach(l => { if (l.dataset.view === 'companies') { const s = l.querySelector('.nav-icon'); if (s && typeof icon === 'function') s.innerHTML = icon('building', 16); } }); }, 400);
 console.log('[Companies+Tags] loaded');
 
-/* ========== projects-pro.js ========== */
+/* === projects-pro.js === */
 // ===== PROJECTS PRO MODULE (Phase 30) =====
 
 function projectTasks(pid) { return (currentData.tasks || []).filter(t => t.projectId === pid); }
@@ -6073,7 +6070,7 @@ async function delSubtask(taskId, subId) {
 
 console.log('[ProjectsPro] Details + subtasks loaded');
 
-/* ========== automation.js ========== */
+/* === automation.js === */
 // ===== AUTOMATION RULES ENGINE (Phase 31) =====
 function getRulesState() { try { return JSON.parse(localStorage.getItem('crm_rules') || '{}'); } catch (e) { return {}; } }
 function setRuleEnabled(id, on) { const s = getRulesState(); s[id] = on; localStorage.setItem('crm_rules', JSON.stringify(s)); }
@@ -6172,7 +6169,7 @@ setTimeout(() => { runAutomations(); injectRulesUI(); }, 1500);
 setInterval(runAutomations, 60000);
 console.log('[Automation] Rules engine loaded');
 
-/* ========== okr.js ========== */
+/* === okr.js === */
 // ===== OKR MODULE (Phase 31) =====
 function getOkrs() { try { return JSON.parse(localStorage.getItem('crm_okrs') || '[]'); } catch (e) { return []; } }
 function saveOkrs(o) { localStorage.setItem('crm_okrs', JSON.stringify(o)); }
@@ -6256,7 +6253,7 @@ window.switchView = function(v) { origSwitchO(v); if (v === 'okr') setTimeout(re
 setTimeout(() => { document.querySelectorAll('.nav-link').forEach(l => { if (l.dataset.view === 'okr') { const s = l.querySelector('.nav-icon'); if (s && typeof icon === 'function') s.innerHTML = icon('sparkle', 16); } }); }, 400);
 console.log('[OKR] loaded');
 
-/* ========== global-search.js ========== */
+/* === global-search.js === */
 // ===== GLOBAL SEARCH (Phase 32) - index all entities =====
 const _origSearchCommand = window.searchCommand;
 window.searchCommand = async function(q) {
