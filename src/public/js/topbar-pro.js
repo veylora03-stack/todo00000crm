@@ -5,22 +5,37 @@ const TB_SVG = {
     download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'
 };
 
+TB_SVG.database = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>';
+TB_SVG.sun = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+TB_SVG.moon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
 function setTopbarIcons() {
-    const tb = document.querySelector('.topbar');
-    if (!tb) return;
-    const btns = Array.from(tb.querySelectorAll('.topbar-actions .icon-button'));
-    let nonNotif = 0;
-    btns.forEach(b => {
-        if (b.id === 'notificationBtn') {
-            b.innerHTML = (b.querySelector('.notification-badge') ? b.querySelector('.notification-badge').outerHTML : '') + TB_SVG.bell;
-            b.dataset.tip = 'اعلان‌ها';
-        } else {
-            const keep = b.querySelector('.notification-badge');
-            b.innerHTML = (keep ? keep.outerHTML : '') + (nonNotif === 0 ? TB_SVG.gear : TB_SVG.download);
-            b.dataset.tip = nonNotif === 0 ? 'تنظیمات' : 'پشتیبان‌گیری';
-            nonNotif++;
-        }
-    });
+  const tb = document.querySelector('.topbar');
+  if (!tb) return;
+  const btns = Array.from(tb.querySelectorAll('.topbar-actions .icon-button'));
+  btns.forEach(b => {
+    const id = b.id || '';
+    const title = (b.getAttribute('title') || '').toLowerCase();
+    const onclick = (b.getAttribute('onclick') || '').toLowerCase();
+    const cls = (b.className || '').toLowerCase();
+    // Skip theme-switcher button (it manages its own icon)
+    if (cls.includes('theme-toggle-btn')) return;
+    const keep = b.querySelector('.notification-badge');
+    const keepHtml = keep ? keep.outerHTML : '';
+    let icon = null;
+    if (id === 'notificationBtn' || title.includes('notification') || title.includes('اعلان')) {
+      icon = TB_SVG.bell;
+    } else if (id === 'installBtn' || title.includes('نصب') || title.includes('install')) {
+      icon = TB_SVG.download;
+    } else if (id === 'themeToggle' || cls.includes('theme') || title.includes('تم') || title.includes('theme')) {
+      const t = (typeof themeSwitcher !== 'undefined') ? themeSwitcher.getCurrentTheme() : 'dark';
+      icon = (t === 'dark') ? TB_SVG.sun : TB_SVG.moon;
+    } else if (title.includes('settings') || title.includes('تنظیمات') || onclick.includes('settings')) {
+      icon = TB_SVG.gear;
+    } else if (title.includes('backup') || title.includes('پشتیبان')) {
+      icon = TB_SVG.database;
+    }
+    if (icon) b.innerHTML = keepHtml + icon;
+  });
 }
 
 function enhanceTopbar2() {
@@ -69,10 +84,10 @@ setTimeout(() => {
     btn.id = 'themeToggle';
     btn.className = 'icon-button';
     btn.title = 'تغییر تم';
-    btn.innerHTML = $context.state.theme === 'dark' ? '☀️' : '🌙';
+    btn.innerHTML = $context.state.theme === 'dark' ? TB_SVG.sun : TB_SVG.moon;
     btn.onclick = () => {
         $context.toggleTheme();
-        btn.innerHTML = $context.state.theme === 'dark' ? '☀️' : '🌙';
+        btn.innerHTML = $context.state.theme === 'dark' ? TB_SVG.sun : TB_SVG.moon;
     };
     
     tb.insertBefore(btn, tb.firstChild);
