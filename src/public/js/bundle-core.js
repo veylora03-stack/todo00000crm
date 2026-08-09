@@ -1,4 +1,4 @@
-// CRM PRO CORE BUNDLE (auto) 2026-08-09 23:21
+// CRM PRO CORE BUNDLE (auto) 2026-08-09 23:52
 
 /* === core.js === */
 // ===== CORE MODULE =====
@@ -52,6 +52,11 @@ function setupNavigation() {
 }
 
 function switchView(view) {
+    // Lazy load modules for this view
+    if (typeof lazyLoader !== 'undefined') {
+        lazyLoader.loadView(view).catch(e => console.error('[Lazy]', e));
+    }
+    
     currentView = view;
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     const el = document.getElementById('view-' + view);
