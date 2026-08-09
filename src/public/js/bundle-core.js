@@ -1,4 +1,4 @@
-// CRM PRO CORE BUNDLE (auto) 2026-08-10 01:55
+// CRM PRO CORE BUNDLE (auto) 2026-08-10 01:58
 
 /* === core.js === */
 // ===== CORE MODULE =====
@@ -696,7 +696,7 @@ const themeSwitcher = (() => {
         
         if (typeof IconsPro !== 'undefined') {
             toggleIcon.innerHTML = theme === 'dark' ? IconsPro.moon(12) : IconsPro.sun(12);
-            toggleIcon.style.color = 'white';
+            toggleIcon.style.color = 'var(--text-primary)';
             toggleIcon.style.display = 'flex';
             toggleIcon.style.alignItems = 'center';
             toggleIcon.style.justifyContent = 'center';
@@ -765,7 +765,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const toggleBtn = document.createElement('button');
         toggleBtn.className = 'icon-button theme-toggle-btn';
         toggleBtn.title = 'تغییر تم';
-        toggleBtn.innerHTML = '<span class="theme-toggle"><span class="theme-toggle-thumb" id="themeToggleIcon"></span></span>';
+        toggleBtn.innerHTML = '<span id="themeToggleIcon" style="display:inline-flex;align-items:center;justify-content:center;"></span>';
         toggleBtn.onclick = () => themeSwitcher.toggle();
         
         const settingsBtn = topbarActions.querySelector('button[title="Settings"]');

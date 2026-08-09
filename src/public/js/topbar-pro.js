@@ -75,20 +75,4 @@ window.switchView = function(v) { origSV2(v); setTimeout(setTopbarIcons, 100); }
 
 setTimeout(enhanceTopbar2, 400);
 setTimeout(setTopbarIcons, 1200);
-// Theme toggle button in topbar
-setTimeout(() => {
-    const tb = document.querySelector('.topbar-actions');
-    if (!tb || tb.querySelector('#themeToggle')) return;
-    
-    const btn = document.createElement('button');
-    btn.id = 'themeToggle';
-    btn.className = 'icon-button';
-    btn.title = 'تغییر تم';
-    btn.innerHTML = $context.state.theme === 'dark' ? TB_SVG.sun : TB_SVG.moon;
-    btn.onclick = () => {
-        $context.toggleTheme();
-        btn.innerHTML = $context.state.theme === 'dark' ? TB_SVG.sun : TB_SVG.moon;
-    };
-    
-    tb.insertBefore(btn, tb.firstChild);
-}, 300);
+
