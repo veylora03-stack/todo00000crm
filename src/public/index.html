@@ -75,7 +75,11 @@
                         <span class="nav-link-label">ایده‌ها</span>
                         <span class="nav-link-count" id="count-ideas">0</span>
                     </div>
-                                        <div class="nav-link" data-view="graph">
+                                                            <div class="nav-link" data-view="okr">
+                        <span class="nav-icon"></span>
+                        <span class="nav-link-label">اهداف (OKR)</span>
+                    </div>
+                    <div class="nav-link" data-view="graph">
                         <span class="nav-icon"></span>
                         <span class="nav-link-label">گراف دانش</span>
                     </div>
@@ -431,7 +435,15 @@
                     </div>
                     <div class="graph-container" id="graphContainer"></div>
                 </section>
-                                                <!-- Companies View -->
+                                                                <!-- OKR View -->
+                <section id="view-okr" class="view">
+                    <div class="page-header">
+                        <div><h1 class="page-title">اهداف فصلی (OKR)</h1><div class="page-subtitle">Objectives + Key Results</div></div>
+                        <div class="page-actions"><button class="btn btn-primary" onclick="addOkr()">+ هدف جدید</button></div>
+                    </div>
+                    <div class="okr-list" id="okrList"></div>
+                </section>
+                <!-- Companies View -->
                 <section id="view-companies" class="view">
                     <div class="page-header">
                         <div><h1 class="page-title">شرکت‌ها</h1><div class="page-subtitle">سازمان‌ها و ارتباطاتشان</div></div>
@@ -753,6 +765,8 @@
     <script src="js/pipeline.js"></script>
     <script src="js/companies.js"></script>
     <script src="js/projects-pro.js"></script>
+    <script src="js/automation.js"></script>
+    <script src="js/okr.js"></script>
 
     <script>
         // Service Worker Registration
