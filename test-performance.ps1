@@ -1,19 +1,19 @@
-﻿# ===== CRM Pro Performance Test Suite =====
+# ===== CRM Pro Performance Test Suite =====
 # Run this after every major change
 
 Write-Host "`n=== CRM PRO PERFORMANCE TEST ===" -ForegroundColor Cyan
 Write-Host ""
 
-$passed = 0
-$failed = 0
+$script:passed = 0
+$script:failed = 0
 
 function Test-Check($name, $condition) {
     if ($condition) {
         Write-Host "  [PASS] $name" -ForegroundColor Green
-        $passed++
+        $script:passed++
     } else {
         Write-Host "  [FAIL] $name" -ForegroundColor Red
-        $failed++
+        $script:failed++
     }
 }
 
@@ -70,11 +70,11 @@ try {
 Write-Host "`n========================================" -ForegroundColor Cyan
 Write-Host "  TEST RESULTS" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "  Passed: $passed" -ForegroundColor Green
-Write-Host "  Failed: $failed" -ForegroundColor $(if ($failed -eq 0) { "Green" } else { "Red" })
-Write-Host "  Total:  $($passed + $failed)" -ForegroundColor Cyan
+Write-Host "  Passed: $script:passed" -ForegroundColor Green
+Write-Host "  Failed: $script:failed" -ForegroundColor $(if ($script:failed -eq 0) { "Green" } else { "Red" })
+Write-Host "  Total:  $($script:passed + $script:failed)" -ForegroundColor Cyan
 
-if ($failed -eq 0) {
+if ($script:failed -eq 0) {
     Write-Host "`n  ✓ ALL TESTS PASSED!" -ForegroundColor Green
 } else {
     Write-Host "`n  ✗ Some tests failed!" -ForegroundColor Red
