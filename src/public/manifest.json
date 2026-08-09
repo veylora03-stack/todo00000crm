@@ -1,69 +1,41 @@
 ﻿{
-    "description":  "سیستم مدیریت ارتباط با مشتری آفلاین",
-    "scope":  "/",
-    "categories":  [
-                       "business",
-                       "productivity"
-                   ],
-    "name":  "CRM Pro",
-    "dir":  "rtl",
-    "icons":  [
-                  {
-                      "sizes":  "192x192",
-                      "purpose":  "any maskable",
-                      "type":  "image/svg+xml",
-                      "src":  "/icons/icon-192.svg"
-                  },
-                  {
-                      "sizes":  "512x512",
-                      "purpose":  "any maskable",
-                      "type":  "image/svg+xml",
-                      "src":  "/icons/icon-512.svg"
-                  }
-              ],
-    "shortcuts":  [
-                      {
-                          "url":  "/?view=tasks",
-                          "description":  "مشاهده کارها",
-                          "name":  "کارها",
-                          "icons":  [
-                                        {
-                                            "src":  "/icons/icon-192.svg",
-                                            "sizes":  "192x192"
-                                        }
-                                    ],
-                          "short_name":  "Tasks"
-                      },
-                      {
-                          "url":  "/?view=people",
-                          "description":  "مشاهده مخاطبان",
-                          "name":  "مخاطبان",
-                          "icons":  [
-                                        {
-                                            "src":  "/icons/icon-192.svg",
-                                            "sizes":  "192x192"
-                                        }
-                                    ],
-                          "short_name":  "People"
-                      },
-                      {
-                          "url":  "/?view=dashboard",
-                          "description":  "مشاهده داشبورد",
-                          "name":  "داشبورد",
-                          "icons":  [
-                                        {
-                                            "src":  "/icons/icon-192.svg",
-                                            "sizes":  "192x192"
-                                        }
-                                    ],
-                          "short_name":  "Dashboard"
-                      }
-                  ],
-    "orientation":  "portrait-primary",
-    "display":  "standalone",
-    "theme_color":  "#7c3aed",
-    "background_color":  "#7c3aed",
-    "start_url":  "/",
-    "short_name":  "CRM",
-    "lang":  "fa"
+  "name": "CRM Pro",
+  "short_name": "CRM",
+  "description": "سیستم مدیریت ارتباط با مشتری آفلاین",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#7c3aed",
+  "theme_color": "#7c3aed",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "fa",
+  "dir": "rtl",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {"src": "/icons/icon-192.svg", "sizes": "192x192", "type": "image/svg+xml", "purpose": "any maskable"},
+    {"src": "/icons/icon-512.svg", "sizes": "512x512", "type": "image/svg+xml", "purpose": "any maskable"}
+  ],
+  "shortcuts": [
+    {
+      "name": "کارها",
+      "short_name": "Tasks",
+      "description": "مشاهده کارها",
+      "url": "/?view=tasks",
+      "icons": [{"src": "/icons/icon-192.svg", "sizes": "192x192"}]
+    },
+    {
+      "name": "مخاطبان",
+      "short_name": "People",
+      "description": "مشاهده مخاطبان",
+      "url": "/?view=people",
+      "icons": [{"src": "/icons/icon-192.svg", "sizes": "192x192"}]
+    },
+    {
+      "name": "داشبورد",
+      "short_name": "Dashboard",
+      "description": "مشاهده داشبورد",
+      "url": "/?view=dashboard",
+      "icons": [{"src": "/icons/icon-192.svg", "sizes": "192x192"}]
+    }
+  ]
 }
