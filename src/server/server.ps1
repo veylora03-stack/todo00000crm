@@ -51,6 +51,12 @@ function Send-Response {
         $response.Headers.Add("Access-Control-Allow-Origin", "*")
         $response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
         $response.Headers.Add("Access-Control-Allow-Headers", "Content-Type")
+        # Security Headers (Phase 43)
+        $response.Headers.Add("X-Frame-Options", "DENY")
+        $response.Headers.Add("X-Content-Type-Options", "nosniff")
+        $response.Headers.Add("Referrer-Policy", "strict-origin-when-cross-origin")
+        $response.Headers.Add("Permissions-Policy", "geolocation=(), microphone=(), camera=()")
+        $response.Headers.Add("X-XSS-Protection", "1; mode=block")
         # Cache-Control for static files
         if ($relativePath -match "\.(js|css|html)$") {
             $response.Headers.Add("Cache-Control", "no-cache, no-store, must-revalidate")
@@ -201,6 +207,12 @@ function Send-Response {
         $response.Headers.Add("Access-Control-Allow-Origin", "*")
         $response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
         $response.Headers.Add("Access-Control-Allow-Headers", "Content-Type")
+        # Security Headers (Phase 43)
+        $response.Headers.Add("X-Frame-Options", "DENY")
+        $response.Headers.Add("X-Content-Type-Options", "nosniff")
+        $response.Headers.Add("Referrer-Policy", "strict-origin-when-cross-origin")
+        $response.Headers.Add("Permissions-Policy", "geolocation=(), microphone=(), camera=()")
+        $response.Headers.Add("X-XSS-Protection", "1; mode=block")
         # Cache-Control for static files
         if ($relativePath -match "\.(js|css|html)$") {
             $response.Headers.Add("Cache-Control", "no-cache, no-store, must-revalidate")
@@ -358,6 +370,12 @@ function Send-Response {
         $response.Headers.Add("Access-Control-Allow-Origin", "*")
         $response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
         $response.Headers.Add("Access-Control-Allow-Headers", "Content-Type")
+        # Security Headers (Phase 43)
+        $response.Headers.Add("X-Frame-Options", "DENY")
+        $response.Headers.Add("X-Content-Type-Options", "nosniff")
+        $response.Headers.Add("Referrer-Policy", "strict-origin-when-cross-origin")
+        $response.Headers.Add("Permissions-Policy", "geolocation=(), microphone=(), camera=()")
+        $response.Headers.Add("X-XSS-Protection", "1; mode=block")
         # Cache-Control for static files
         if ($relativePath -match "\.(js|css|html)$") {
             $response.Headers.Add("Cache-Control", "no-cache, no-store, must-revalidate")
@@ -1186,6 +1204,12 @@ function Send-Response {
         $response.Headers.Add("Access-Control-Allow-Origin", "*")
         $response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
         $response.Headers.Add("Access-Control-Allow-Headers", "Content-Type")
+        # Security Headers (Phase 43)
+        $response.Headers.Add("X-Frame-Options", "DENY")
+        $response.Headers.Add("X-Content-Type-Options", "nosniff")
+        $response.Headers.Add("Referrer-Policy", "strict-origin-when-cross-origin")
+        $response.Headers.Add("Permissions-Policy", "geolocation=(), microphone=(), camera=()")
+        $response.Headers.Add("X-XSS-Protection", "1; mode=block")
         # Cache-Control for static files
         if ($relativePath -match "\.(js|css|html)$") {
             $response.Headers.Add("Cache-Control", "no-cache, no-store, must-revalidate")
