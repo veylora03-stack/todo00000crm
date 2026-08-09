@@ -1,80 +1,146 @@
-﻿/* ===== THEME SYSTEM (Phase 44 - Dark/Light Mode) ===== */
+﻿/* ===== THEME SYSTEM v2 (Phase 44 - Beautiful Themes) ===== */
 
-/* Default: Dark Theme */
+/* Default: Dark Theme (Deep Space) */
 :root {
+    /* Backgrounds with subtle gradients */
     --bg-primary: #0a0a0f;
     --bg-secondary: #13131a;
     --bg-tertiary: #1c1c27;
     --bg-card: rgba(28, 28, 39, 0.6);
-    --bg-hover: rgba(124, 58, 237, 0.1);
+    --bg-hover: rgba(124, 58, 237, 0.12);
+    --bg-gradient: linear-gradient(135deg, #0a0a0f 0%, #13131a 50%, #1a1025 100%);
     
+    /* Aurora effect for dark mode */
+    --aurora-1: rgba(124, 58, 237, 0.15);
+    --aurora-2: rgba(236, 72, 153, 0.12);
+    --aurora-3: rgba(59, 130, 246, 0.1);
+    
+    /* Text */
     --text-primary: #ffffff;
-    --text-secondary: #a1a1aa;
-    --text-tertiary: #71717a;
+    --text-secondary: #b4b4c0;
+    --text-tertiary: #8a8a99;
     --text-inverse: #000000;
     
+    /* Borders */
     --border-primary: rgba(255, 255, 255, 0.1);
-    --border-secondary: rgba(255, 255, 255, 0.05);
+    --border-secondary: rgba(255, 255, 255, 0.06);
+    --border-accent: rgba(124, 58, 237, 0.4);
     
+    /* Accent colors */
     --accent-primary: #7c3aed;
     --accent-secondary: #ec4899;
-    --accent-gradient: linear-gradient(135deg, #7c3aed, #ec4899);
+    --accent-gradient: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+    --accent-gradient-hover: linear-gradient(135deg, #8b5cf6 0%, #f472b6 100%);
     
+    /* Status colors */
     --success: #22c55e;
     --warning: #eab308;
     --danger: #ef4444;
     --info: #3b82f6;
     
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
-    --shadow-glow: 0 0 20px rgba(124, 58, 237, 0.3);
+    /* Shadows with color */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 24px rgba(124, 58, 237, 0.4);
+    --shadow-glow-pink: 0 0 24px rgba(236, 72, 153, 0.35);
+    --shadow-accent: 0 8px 32px rgba(124, 58, 237, 0.25);
     
-    --blur-sm: blur(4px);
-    --blur-md: blur(12px);
-    --blur-lg: blur(20px);
+    /* Blur effects */
+    --blur-sm: blur(8px);
+    --blur-md: blur(16px);
+    --blur-lg: blur(24px);
     
+    /* Transitions */
     --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-spring: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Light Theme */
+/* Light Theme (Sunrise - Beautiful & Modern) */
 [data-theme="light"] {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8f9fa;
-    --bg-tertiary: #f1f3f5;
-    --bg-card: rgba(255, 255, 255, 0.8);
-    --bg-hover: rgba(124, 58, 237, 0.08);
+    /* Soft gradient backgrounds */
+    --bg-primary: #faf7ff;
+    --bg-secondary: #f3edff;
+    --bg-tertiary: #ece4fb;
+    --bg-card: rgba(255, 255, 255, 0.85);
+    --bg-hover: rgba(124, 58, 237, 0.1);
+    --bg-gradient: linear-gradient(135deg, #faf7ff 0%, #f3edff 50%, #fdf2f8 100%);
     
-    --text-primary: #18181b;
-    --text-secondary: #52525b;
-    --text-tertiary: #a1a1aa;
+    /* Soft aurora for light mode */
+    --aurora-1: rgba(124, 58, 237, 0.08);
+    --aurora-2: rgba(236, 72, 153, 0.07);
+    --aurora-3: rgba(59, 130, 246, 0.06);
+    
+    /* Text with better contrast */
+    --text-primary: #2d1b4e;
+    --text-secondary: #5d4a7e;
+    --text-tertiary: #9d8bb8;
     --text-inverse: #ffffff;
     
-    --border-primary: rgba(0, 0, 0, 0.1);
-    --border-secondary: rgba(0, 0, 0, 0.05);
+    /* Borders with accent tint */
+    --border-primary: rgba(124, 58, 237, 0.15);
+    --border-secondary: rgba(124, 58, 237, 0.08);
+    --border-accent: rgba(124, 58, 237, 0.5);
     
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.08);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
-    --shadow-glow: 0 0 20px rgba(124, 58, 237, 0.2);
+    /* Accent colors (slightly darker for light bg) */
+    --accent-primary: #6d28d9;
+    --accent-secondary: #db2777;
+    --accent-gradient: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+    --accent-gradient-hover: linear-gradient(135deg, #6d28d9 0%, #db2777 100%);
+    
+    /* Colored shadows for light mode (the magic!) */
+    --shadow-sm: 0 2px 8px rgba(124, 58, 237, 0.08);
+    --shadow-md: 0 8px 24px rgba(124, 58, 237, 0.12);
+    --shadow-lg: 0 16px 48px rgba(124, 58, 237, 0.18);
+    --shadow-glow: 0 0 24px rgba(124, 58, 237, 0.25);
+    --shadow-glow-pink: 0 0 24px rgba(236, 72, 153, 0.2);
+    --shadow-accent: 0 8px 32px rgba(124, 58, 237, 0.15);
 }
 
-/* Respect system preference */
-@media (prefers-color-scheme: light) {
-    :root:not([data-theme="dark"]) {
-        --bg-primary: #ffffff;
-        --bg-secondary: #f8f9fa;
-        --bg-tertiary: #f1f3f5;
-        --bg-card: rgba(255, 255, 255, 0.8);
-        --text-primary: #18181b;
-        --text-secondary: #52525b;
-        --text-tertiary: #a1a1aa;
-        --border-primary: rgba(0, 0, 0, 0.1);
-        --border-secondary: rgba(0, 0, 0, 0.05);
-    }
+/* Apply gradient background to body */
+body {
+    background: var(--bg-gradient) !important;
+    background-attachment: fixed !important;
+}
+
+/* Aurora effect overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, var(--aurora-1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 30%, var(--aurora-2) 0%, transparent 40%),
+        radial-gradient(circle at 50% 80%, var(--aurora-3) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+    animation: auroraFloat 20s ease-in-out infinite;
+}
+
+@keyframes auroraFloat {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+}
+
+/* Ensure content is above aurora */
+.app, .sidebar, .main, .content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Glassmorphism for cards */
+.card, .modal, .slide-panel, .cmd-palette, .notification-dropdown {
+    background: var(--bg-card) !important;
+    backdrop-filter: var(--blur-md) !important;
+    -webkit-backdrop-filter: var(--blur-md) !important;
+    border: 1px solid var(--border-secondary) !important;
+    box-shadow: var(--shadow-md) !important;
 }
 
 /* Theme transition */
@@ -82,17 +148,18 @@ body.theme-transitioning,
 body.theme-transitioning * {
     transition: background-color var(--transition-base),
                 color var(--transition-base),
-                border-color var(--transition-base) !important;
+                border-color var(--transition-base),
+                box-shadow var(--transition-base) !important;
 }
 
 /* Theme toggle button */
 .theme-toggle {
     position: relative;
-    width: 44px;
-    height: 24px;
+    width: 48px;
+    height: 26px;
     background: var(--bg-tertiary);
     border: 1px solid var(--border-primary);
-    border-radius: 12px;
+    border-radius: 13px;
     cursor: pointer;
     transition: all var(--transition-base);
     display: inline-flex;
@@ -103,32 +170,59 @@ body.theme-transitioning * {
 .theme-toggle:hover {
     border-color: var(--accent-primary);
     box-shadow: var(--shadow-glow);
+    transform: scale(1.05);
 }
 
 .theme-toggle-thumb {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     background: var(--accent-gradient);
     border-radius: 50%;
-    transition: transform var(--transition-bounce);
+    transition: transform var(--transition-spring);
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 10px;
+    font-size: 11px;
+    box-shadow: var(--shadow-sm);
 }
 
 [data-theme="light"] .theme-toggle-thumb {
-    transform: translateX(20px);
+    transform: translateX(22px) rotate(180deg);
 }
 
-/* Smooth theme change animation */
+/* Theme change animation */
 @keyframes themeFlash {
     0% { opacity: 1; }
-    50% { opacity: 0.7; }
+    50% { opacity: 0.85; }
     100% { opacity: 1; }
 }
 
 .theme-changing {
-    animation: themeFlash 0.3s ease-in-out;
+    animation: themeFlash 0.4s ease-in-out;
+}
+
+/* Buttons with gradient in light mode */
+[data-theme="light"] .btn-primary {
+    background: var(--accent-gradient);
+    box-shadow: var(--shadow-accent);
+}
+
+[data-theme="light"] .btn-primary:hover {
+    background: var(--accent-gradient-hover);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
+}
+
+/* Sidebar glass effect */
+[data-theme="light"] .sidebar {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: var(--blur-lg) !important;
+    border-right: 1px solid var(--border-secondary) !important;
+}
+
+/* Topbar glass effect */
+[data-theme="light"] .topbar {
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: var(--blur-md) !important;
 }
