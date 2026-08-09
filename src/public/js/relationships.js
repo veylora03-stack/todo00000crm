@@ -1,4 +1,4 @@
-// ===== RELATIONSHIPS MODULE (Phase 10) =====
+﻿// ===== RELATIONSHIPS MODULE (Phase 10) =====
 const FREQ_DAYS = { weekly: 7, monthly: 30, quarterly: 90 };
 const FREQ_LABELS = { weekly: 'هفتگی', monthly: 'ماهانه', quarterly: 'فصلی', none: 'بدون یادآوری' };
 
@@ -200,5 +200,3 @@ setTimeout(async () => {
     const od = currentData.people.filter(p => relationshipStats(p).overdue).length;
     if (od > 0) setTimeout(() => toast('⚠️ ' + toPersianDigits(od) + ' نفر نیاز به پیگیری دارند', 'info'), 2500);
 }, 1500);
-
-console.log('[Relationships] Module loaded');

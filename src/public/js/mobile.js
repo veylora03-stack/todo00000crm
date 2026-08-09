@@ -1,4 +1,4 @@
-// ===== MOBILE MODULE (Phase 27) =====
+﻿// ===== MOBILE MODULE (Phase 27) =====
 const MOBILE_NAV = [
     { view: 'dashboard', icon: '🏠', label: 'خانه' },
     { view: 'tasks', icon: '✅', label: 'کارها' },
@@ -85,4 +85,3 @@ document.addEventListener('touchend', e => {
 
 setTimeout(injectMobile, 400);
 window.addEventListener('resize', () => { if (!isMobile()) document.body.classList.remove('sidebar-open'); });
-console.log('[Mobile] Bottom nav + drawer + swipe loaded');

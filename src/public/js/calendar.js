@@ -1,4 +1,4 @@
-// ===== CALENDAR MODULE =====
+﻿// ===== CALENDAR MODULE =====
 let currentTaskView = 'kanban';
 let currentCalendarDate = new Date();
 let selectedCalendarDay = null;
@@ -384,5 +384,3 @@ setTimeout(() => {
     injectTaskViewIcons();
     setInterval(() => { if (currentTaskView === 'week') renderCurrentTimeIndicator(); }, 60000);
 }, 300);
-
-console.log('[Calendar] Module loaded');

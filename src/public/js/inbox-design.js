@@ -1,4 +1,4 @@
-// ===== INBOX DESIGN v2 - Beautiful Rendering =====
+﻿// ===== INBOX DESIGN v2 - Beautiful Rendering =====
 
 window.renderInbox = function () {
     const container = document.getElementById('inboxList');
@@ -65,5 +65,3 @@ window.renderInbox = function () {
 
     container.innerHTML = html;
 };
-
-console.log('[InboxDesign] Beautiful rendering loaded');

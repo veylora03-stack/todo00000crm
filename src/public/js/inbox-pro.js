@@ -1,4 +1,4 @@
-// ===== INBOX GOD MODE (Phase 15.3) =====
+﻿// ===== INBOX GOD MODE (Phase 15.3) =====
 let inboxMaster = [];
 let inboxFilter = 'all';
 let lastInboxCount = -1;
@@ -226,5 +226,3 @@ function showShortcutHelp() {
         '<div class="shortcut-row"><span>بستن</span><span class="kbd">Esc</span></div></div>';
     document.body.appendChild(o);
 }
-
-console.log('[InboxGod] GOD MODE loaded');

@@ -1,4 +1,4 @@
-// ===== GAMIFICATION MODULE (Phase 13) =====
+﻿// ===== GAMIFICATION MODULE (Phase 13) =====
 
 const ACHIEVEMENTS = [
     { id: 'first_task', icon: '🎯', title: 'اولین قدم', desc: 'اولین کار خود را تکمیل کن' },
@@ -250,5 +250,3 @@ setTimeout(() => {
     injectAchievementsSection();
     checkAchievements();
 }, 500);
-
-console.log('[Gamification] Module loaded');

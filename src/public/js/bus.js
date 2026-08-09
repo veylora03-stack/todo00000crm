@@ -1,4 +1,4 @@
-// ===== EVENT BUS (Phase 32) - central pub/sub =====
+﻿// ===== EVENT BUS (Phase 32) - central pub/sub =====
 // هدف: حذف زنجیره window.wrap ها؛ ماژول‌ها به جای wrap، subscribe می‌کنند.
 const bus = (() => {
     const map = new Map();
@@ -13,7 +13,7 @@ const bus = (() => {
         },
         emit(event, data) {
             (map.get(event) || []).forEach(cb => {
-                try { cb(data); } catch (e) { console.warn('[bus]', event, e); }
+                try { cb(data); } catch (e) { }
             });
         }
     };
@@ -36,5 +36,3 @@ window.switchView = function(v) {
     _origSwitchViewBus(v);
     bus.emit('view:changed', v);
 };
-
-console.log('[Bus] Event bus + central tick loaded');

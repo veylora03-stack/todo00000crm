@@ -1,4 +1,4 @@
-// ===== AI INSIGHTS ENGINE (Phase 26) - Offline, rule-based =====
+﻿// ===== AI INSIGHTS ENGINE (Phase 26) - Offline, rule-based =====
 
 function aiDismissed() {
     try { return JSON.parse(localStorage.getItem('crm_ai_dismissed') || '{}'); } catch (e) { return {}; }
@@ -164,4 +164,3 @@ window.renderDashboard = function() {
 };
 
 setTimeout(renderAiBar, 600);
-console.log('[AI Insights] Engine loaded');

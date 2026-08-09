@@ -1,4 +1,4 @@
-// ===== PIPELINE MODULE (Phase 28) =====
+﻿// ===== PIPELINE MODULE (Phase 28) =====
 const DEAL_STAGES = [
     { key: 'lead', label: 'سرنخ', color: '#8b5cf6' },
     { key: 'qualified', label: 'واجد شرایط', color: '#3b82f6' },
@@ -134,5 +134,3 @@ setTimeout(() => {
         }
     });
 }, 400);
-
-console.log('[Pipeline] Sales pipeline loaded');

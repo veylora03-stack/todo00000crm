@@ -1,4 +1,4 @@
-// ===== CUSTOMIZABLE DASHBOARD MODULE (Phase 21) =====
+﻿// ===== CUSTOMIZABLE DASHBOARD MODULE (Phase 21) =====
 
 const CW_DEFAULT_ORDER = ['commandHub', 'focusSuite', 'vitalsRow', 'ambientRow', 'statsGrid', 'chartsGrid', 'heatmap', 'insights', 'relWidgets', 'achievements', 'timeline'];
 
@@ -204,5 +204,3 @@ window.renderDashboard = function() {
     origRenderDashC();
     setTimeout(() => { cwPrepare(); cwApply(); injectCustomizeFab(); }, 200);
 };
-
-console.log('[Customize] Draggable dashboard loaded');

@@ -1,4 +1,4 @@
-// ===== COMMAND HUB MODULE (Phase 18) =====
+﻿// ===== COMMAND HUB MODULE (Phase 18) =====
 
 const QUICK_ACTIONS = [
     { label: 'کار جدید', icon: 'check', c1: '#3b82f6', c2: '#06b6d4', action: () => openModal('tasks') },
@@ -56,5 +56,3 @@ window.renderDashboard = function() {
     origRenderDashH();
     setTimeout(injectCommandHub, 80);
 };
-
-console.log('[CommandHub] Smart Search + Quick Actions loaded');

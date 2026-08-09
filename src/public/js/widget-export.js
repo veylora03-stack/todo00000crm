@@ -1,4 +1,4 @@
-// ===== WIDGET EXPORT SYSTEM =====
+﻿// ===== WIDGET EXPORT SYSTEM =====
 function addWidgetMenu(widgetEl, widgetId, dataFn) {
     if (widgetEl.querySelector('.widget-menu-btn')) return;
     
@@ -61,4 +61,3 @@ function injectWidgetMenus() {
 }
 
 setTimeout(injectWidgetMenus, 500);
-console.log('[Widget Export] Menus injected');

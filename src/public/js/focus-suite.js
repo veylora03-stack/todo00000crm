@@ -1,4 +1,4 @@
-// ===== FOCUS SUITE MODULE (Phase 17) =====
+﻿// ===== FOCUS SUITE MODULE (Phase 17) =====
 // Today's Focus + Pomodoro + Time Blocks
 
 let focusSelectedTasks = [];
@@ -419,5 +419,3 @@ window.loadAllData = async function() {
         renderTimeBlocks();
     }
 };
-
-console.log('[FocusSuite] Today Focus + Pomodoro + Time Blocks loaded');

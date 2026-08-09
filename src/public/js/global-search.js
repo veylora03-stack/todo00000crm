@@ -1,4 +1,4 @@
-// ===== GLOBAL SEARCH (Phase 32) - index all entities =====
+﻿// ===== GLOBAL SEARCH (Phase 32) - index all entities =====
 const _origSearchCommand = window.searchCommand;
 window.searchCommand = async function(q) {
     await _origSearchCommand(q);
@@ -21,4 +21,3 @@ function addClientResults(q) {
     
     renderCommandResults();
 }
-console.log('[GlobalSearch] all-entity search loaded');

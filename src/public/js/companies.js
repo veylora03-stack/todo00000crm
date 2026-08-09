@@ -1,4 +1,4 @@
-// ===== COMPANIES MODULE (Phase 29) =====
+﻿// ===== COMPANIES MODULE (Phase 29) =====
 function companyMembers(cid) { return (currentData.people || []).filter(p => p.companyId === cid); }
 function companyDeals(cid) {
     const mids = companyMembers(cid).map(p => p.id);
@@ -168,4 +168,3 @@ async function removePersonTag(id, tag) {
 }
 
 setTimeout(() => { document.querySelectorAll('.nav-link').forEach(l => { if (l.dataset.view === 'companies') { const s = l.querySelector('.nav-icon'); if (s && typeof icon === 'function') s.innerHTML = icon('building', 16); } }); }, 400);
-console.log('[Companies+Tags] loaded');

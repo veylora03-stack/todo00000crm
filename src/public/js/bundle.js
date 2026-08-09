@@ -1,4 +1,4 @@
-// CRM PRO BUNDLE (auto) 2026-08-09 21:15
+// CRM PRO BUNDLE (auto) 2026-08-09 23:10
 
 /* === core.js === */
 // ===== CORE MODULE =====
@@ -10,12 +10,12 @@ let currentPanelType = null;
 let taskFilter = 'all';
 
 document.addEventListener('DOMContentLoaded', () => {
-    try { injectIcons(); } catch(e) { console.warn('injectIcons:', e); }
-    try { setupNavigation(); } catch(e) { console.warn('setupNavigation:', e); }
-    try { setGreeting(); } catch(e) { console.warn('setGreeting:', e); }
-    try { loadAllData(); } catch(e) { console.warn('loadAllData:', e); }
-    try { setupKeyboard(); } catch(e) { console.warn('setupKeyboard:', e); }
-    try { setupContextMenu(); } catch(e) { console.warn('setupContextMenu:', e); }
+    try { injectIcons(); } catch(e) { }
+    try { setupNavigation(); } catch(e) { }
+    try { setGreeting(); } catch(e) { }
+    try { loadAllData(); } catch(e) { }
+    try { setupKeyboard(); } catch(e) { }
+    try { setupContextMenu(); } catch(e) { }
 });
 
 function injectIcons() {
@@ -100,17 +100,17 @@ async function loadAllData() {
             logs: Array.isArray(r[5]) ? r[5] : []
         };
         renderAll();
-    } catch (err) { console.error('loadAllData:', err); toast('خطا در بارگذاری داده‌ها', 'error'); }
+    } catch (err) { toast('خطا در بارگذاری داده‌ها', 'error'); }
 }
 
 function renderAll() {
-    try { renderDashboard(); } catch(e) { console.warn(e); }
-    try { renderPeople(); } catch(e) { console.warn(e); }
-    try { renderKanban(); } catch(e) { console.warn(e); }
-    try { renderIdeas(); } catch(e) { console.warn(e); }
-    try { renderNotes(); } catch(e) { console.warn(e); }
-    try { renderProjects(); } catch(e) { console.warn(e); }
-    try { updateCounts(); } catch(e) { console.warn(e); }
+    try { renderDashboard(); } catch(e) { }
+    try { renderPeople(); } catch(e) { }
+    try { renderKanban(); } catch(e) { }
+    try { renderIdeas(); } catch(e) { }
+    try { renderNotes(); } catch(e) { }
+    try { renderProjects(); } catch(e) { }
+    try { updateCounts(); } catch(e) { }
 }
 
 function updateCounts() {
@@ -524,7 +524,7 @@ const bus = (() => {
         },
         emit(event, data) {
             (map.get(event) || []).forEach(cb => {
-                try { cb(data); } catch (e) { console.warn('[bus]', event, e); }
+                try { cb(data); } catch (e) { }
             });
         }
     };
@@ -547,8 +547,6 @@ window.switchView = function(v) {
     _origSwitchViewBus(v);
     bus.emit('view:changed', v);
 };
-
-console.log('[Bus] Event bus + central tick loaded');
 
 /* === calendar.js === */
 // ===== CALENDAR MODULE =====
@@ -938,8 +936,6 @@ setTimeout(() => {
     setInterval(() => { if (currentTaskView === 'week') renderCurrentTimeIndicator(); }, 60000);
 }, 300);
 
-console.log('[Calendar] Module loaded');
-
 /* === reports.js === */
 // ===== REPORTS MODULE =====
 let currentReportType = 'overview';
@@ -1105,7 +1101,6 @@ function injectReportIcons() {
 }
 
 setTimeout(injectReportIcons, 300);
-console.log('[Reports] Module loaded');
 
 /* === notifications.js === */
 // ===== NOTIFICATIONS MODULE =====
@@ -1137,7 +1132,7 @@ async function checkNotifications() {
         });
         const dd = document.getElementById('notifDropdown');
         if (dd && dd.classList.contains('active')) renderNotificationDropdown();
-    } catch (e) { console.warn('checkNotifications:', e); }
+    } catch (e) { }
 }
 
 function showBrowserNotification(n) {
@@ -1236,7 +1231,6 @@ function setReminder(el, minutes) {
 }
 
 setTimeout(initNotifications, 500);
-console.log('[Notifications] Module loaded');
 
 /* === backup.js === */
 // ===== BACKUP MODULE =====
@@ -1417,8 +1411,6 @@ async function deleteAttachment(aid, et, eid) {
         if (r.success) { toast('پیوست حذف شد', 'success'); const c = document.getElementById('attachmentsContainer'); if (c) renderAttachmentsSection(et, eid, c); }
     } catch (e) { toast('خطا', 'error'); }
 }
-
-console.log('[Backup] Module loaded');
 
 /* === relationships.js === */
 // ===== RELATIONSHIPS MODULE (Phase 10) =====
@@ -1623,8 +1615,6 @@ setTimeout(async () => {
     const od = currentData.people.filter(p => relationshipStats(p).overdue).length;
     if (od > 0) setTimeout(() => toast('⚠️ ' + toPersianDigits(od) + ' نفر نیاز به پیگیری دارند', 'info'), 2500);
 }, 1500);
-
-console.log('[Relationships] Module loaded');
 
 /* === smart.js === */
 // ===== SMART MODULE (Phase 11) =====
@@ -2033,8 +2023,6 @@ setTimeout(() => {
     });
 }, 400);
 
-console.log('[KnowledgeLinks] SIMPLE version loaded');
-
 /* === gamification.js === */
 // ===== GAMIFICATION MODULE (Phase 13) =====
 
@@ -2289,8 +2277,6 @@ setTimeout(() => {
     checkAchievements();
 }, 500);
 
-console.log('[Gamification] Module loaded');
-
 /* === vault.js === */
 // ===== VAULT MODULE (Phase 14) =====
 
@@ -2425,8 +2411,6 @@ window.addEventListener('DOMContentLoaded', () => {
         setTimeout(showVaultLock, 300);
     }
 });
-
-console.log('[Vault] Module loaded');
 
 
 /* === wrapped.js === */
@@ -2601,8 +2585,6 @@ function addWrappedSettings() {
 }
 
 setTimeout(addWrappedSettings, 800);
-
-console.log('[Wrapped] Module loaded');
 
 /* === inbox.js === */
 // ===== PROFESSIONAL INBOX MODULE (Phase 15) =====
@@ -2862,8 +2844,6 @@ window.loadAllData = async function () {
 // Init
 setTimeout(() => { renderInbox(); }, 800);
 
-console.log('[Inbox] Professional module loaded');
-
 /* === inbox-design.js === */
 // ===== INBOX DESIGN v2 - Beautiful Rendering =====
 
@@ -2932,8 +2912,6 @@ window.renderInbox = function () {
 
     container.innerHTML = html;
 };
-
-console.log('[InboxDesign] Beautiful rendering loaded');
 
 /* === inbox-pro.js === */
 // ===== INBOX GOD MODE (Phase 15.3) =====
@@ -3165,8 +3143,6 @@ function showShortcutHelp() {
     document.body.appendChild(o);
 }
 
-console.log('[InboxGod] GOD MODE loaded');
-
 /* === inbox-zen.js === */
 // ===== ZEN MODE + PARTICLES + WORKLOAD (Phase 15.4) =====
 
@@ -3384,8 +3360,6 @@ document.addEventListener('keydown', e => {
     else if (e.key === 'x' || e.key === 'X') { e.preventDefault(); zenDo('delete'); }
 });
 
-console.log('[InboxZen] Zen + Particles + Workload loaded');
-
 /* === dashboard-pro.js === */
 // ===== DASHBOARD GOD MODE (Phase 16) =====
 
@@ -3513,8 +3487,6 @@ window.renderDashboard = function () {
     origRenderDash();
     setTimeout(enhanceDashboard, 60);
 };
-
-console.log('[DashboardGod] GOD MODE loaded');
 
 /* === focus-suite.js === */
 // ===== FOCUS SUITE MODULE (Phase 17) =====
@@ -3939,8 +3911,6 @@ window.loadAllData = async function() {
     }
 };
 
-console.log('[FocusSuite] Today Focus + Pomodoro + Time Blocks loaded');
-
 /* === command-hub.js === */
 // ===== COMMAND HUB MODULE (Phase 18) =====
 
@@ -4000,8 +3970,6 @@ window.renderDashboard = function() {
     origRenderDashH();
     setTimeout(injectCommandHub, 80);
 };
-
-console.log('[CommandHub] Smart Search + Quick Actions loaded');
 
 /* === vitals.js === */
 // ===== VITALS ROW MODULE (Phase 19) =====
@@ -4238,8 +4206,6 @@ window.loadAllData = async function() {
     if (document.getElementById('vitalsRow')) renderVitals();
 };
 
-console.log('[Vitals] Energy + Goals + Relationship loaded');
-
 /* === ambient.js === */
 // ===== AMBIENT SUITE MODULE (Phase 20) =====
 
@@ -4472,8 +4438,6 @@ window.renderDashboard = function() {
     setTimeout(() => { injectAmbient(); injectAIFab(); }, 150);
 };
 
-console.log('[Ambient] AI + Weather + Quote loaded');
-
 /* === customize.js === */
 // ===== CUSTOMIZABLE DASHBOARD MODULE (Phase 21) =====
 
@@ -4682,8 +4646,6 @@ window.renderDashboard = function() {
     setTimeout(() => { cwPrepare(); cwApply(); injectCustomizeFab(); }, 200);
 };
 
-console.log('[Customize] Draggable dashboard loaded');
-
 /* === layout-pro.js === */
 // ===== PRO LAYOUT MODULE (Phase 22) =====
 function injectZoneLabels() {
@@ -4715,8 +4677,6 @@ window.renderDashboard = function() {
     origRenderDashL();
     setTimeout(injectZoneLabels, 250);
 };
-
-console.log('[ProLayout] Bento + zones loaded');
 
 /* === topbar-pro.js === */
 // ===== ULTRA TOPBAR MODULE (Phase 23.5) =====
@@ -4781,7 +4741,6 @@ window.switchView = function(v) { origSV2(v); setTimeout(setTopbarIcons, 100); }
 
 setTimeout(enhanceTopbar2, 400);
 setTimeout(setTopbarIcons, 1200);
-console.log('[UltraTopbar] loaded');
 // Theme toggle button in topbar
 setTimeout(() => {
     const tb = document.querySelector('.topbar-actions');
@@ -4993,7 +4952,6 @@ window.renderDashboard = function() {
 };
 
 setTimeout(() => { qaApplyOrder(); syncZoneLabels(); }, 400);
-console.log('[DashboardQA] 8 fixes loaded');
 
 /* === context.js === */
 // ===== CONTEXT ENGINE - Reactive State Management =====
@@ -5034,7 +4992,7 @@ const $context = (() => {
         _notify(key, value) {
             subscribers.forEach(({ keys, callback }) => {
                 if (!keys || keys.includes(key)) {
-                    try { callback(state); } catch (e) { console.warn('[Context]', e); }
+                    try { callback(state); } catch (e) { }
                 }
             });
             document.dispatchEvent(new CustomEvent('ctx:' + key, { detail: value }));
@@ -5117,8 +5075,6 @@ function applyTheme() {
 $context.watch(['theme'], applyTheme);
 setTimeout(applyTheme, 100);
 
-console.log('[Context Engine] Reactive state management loaded');
-
 /* === widget-export.js === */
 // ===== WIDGET EXPORT SYSTEM =====
 function addWidgetMenu(widgetEl, widgetId, dataFn) {
@@ -5183,7 +5139,6 @@ function injectWidgetMenus() {
 }
 
 setTimeout(injectWidgetMenus, 500);
-console.log('[Widget Export] Menus injected');
 
 /* === widget-interactions.js === */
 // ===== WIDGET INTERACTIONS =====
@@ -5253,8 +5208,6 @@ setTimeout(() => {
     enableInsightsInteraction();
 }, 600);
 
-console.log('[Interactions] Widget interactions enabled');
-
 /* === quick-start.js === */
 // ===== QUICK START GUIDE =====
 const QS_STEPS = [
@@ -5321,8 +5274,6 @@ function skipQuickStart() {
 setTimeout(() => {
     if (!$context.state.quickStartDone) startQuickStart();
 }, 1000);
-
-console.log('[QuickStart] Guide loaded');
 
 /* === ai-insights.js === */
 // ===== AI INSIGHTS ENGINE (Phase 26) - Offline, rule-based =====
@@ -5491,7 +5442,6 @@ window.renderDashboard = function() {
 };
 
 setTimeout(renderAiBar, 600);
-console.log('[AI Insights] Engine loaded');
 
 /* === mobile.js === */
 // ===== MOBILE MODULE (Phase 27) =====
@@ -5581,7 +5531,6 @@ document.addEventListener('touchend', e => {
 
 setTimeout(injectMobile, 400);
 window.addEventListener('resize', () => { if (!isMobile()) document.body.classList.remove('sidebar-open'); });
-console.log('[Mobile] Bottom nav + drawer + swipe loaded');
 
 /* === pipeline.js === */
 // ===== PIPELINE MODULE (Phase 28) =====
@@ -5720,8 +5669,6 @@ setTimeout(() => {
         }
     });
 }, 400);
-
-console.log('[Pipeline] Sales pipeline loaded');
 
 /* === companies.js === */
 // ===== COMPANIES MODULE (Phase 29) =====
@@ -5894,7 +5841,6 @@ async function removePersonTag(id, tag) {
 }
 
 setTimeout(() => { document.querySelectorAll('.nav-link').forEach(l => { if (l.dataset.view === 'companies') { const s = l.querySelector('.nav-icon'); if (s && typeof icon === 'function') s.innerHTML = icon('building', 16); } }); }, 400);
-console.log('[Companies+Tags] loaded');
 
 /* === projects-pro.js === */
 // ===== PROJECTS PRO MODULE (Phase 30) =====
@@ -6062,8 +6008,6 @@ async function delSubtask(taskId, subId) {
     renderSubtasks(taskId);
 }
 
-console.log('[ProjectsPro] Details + subtasks loaded');
-
 /* === automation.js === */
 // ===== AUTOMATION RULES ENGINE (Phase 31) =====
 function getRulesState() { try { return JSON.parse(localStorage.getItem('crm_rules') || '{}'); } catch (e) { return {}; } }
@@ -6161,7 +6105,6 @@ function injectRulesUI() {
 // Run on load + every 60s
 setTimeout(() => { runAutomations(); injectRulesUI(); }, 1500);
 setInterval(runAutomations, 60000);
-console.log('[Automation] Rules engine loaded');
 
 /* === okr.js === */
 // ===== OKR MODULE (Phase 31) =====
@@ -6245,7 +6188,6 @@ const origSwitchO = window.switchView;
 window.switchView = function(v) { origSwitchO(v); if (v === 'okr') setTimeout(renderOkrs, 100); };
 
 setTimeout(() => { document.querySelectorAll('.nav-link').forEach(l => { if (l.dataset.view === 'okr') { const s = l.querySelector('.nav-icon'); if (s && typeof icon === 'function') s.innerHTML = icon('sparkle', 16); } }); }, 400);
-console.log('[OKR] loaded');
 
 /* === global-search.js === */
 // ===== GLOBAL SEARCH (Phase 32) - index all entities =====
@@ -6271,4 +6213,3 @@ function addClientResults(q) {
     
     renderCommandResults();
 }
-console.log('[GlobalSearch] all-entity search loaded');

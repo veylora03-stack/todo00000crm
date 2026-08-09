@@ -1,4 +1,4 @@
-// ===== PROJECTS PRO MODULE (Phase 30) =====
+﻿// ===== PROJECTS PRO MODULE (Phase 30) =====
 
 function projectTasks(pid) { return (currentData.tasks || []).filter(t => t.projectId === pid); }
 
@@ -162,5 +162,3 @@ async function delSubtask(taskId, subId) {
     await loadAllData();
     renderSubtasks(taskId);
 }
-
-console.log('[ProjectsPro] Details + subtasks loaded');

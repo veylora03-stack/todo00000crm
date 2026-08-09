@@ -1,4 +1,4 @@
-// ===== VITALS ROW MODULE (Phase 19) =====
+﻿// ===== VITALS ROW MODULE (Phase 19) =====
 
 function thisWeekStart() {
     const now = new Date();
@@ -231,5 +231,3 @@ window.loadAllData = async function() {
     await origLoadAllDataV();
     if (document.getElementById('vitalsRow')) renderVitals();
 };
-
-console.log('[Vitals] Energy + Goals + Relationship loaded');

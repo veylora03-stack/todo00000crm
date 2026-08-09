@@ -1,4 +1,4 @@
-// ===== QUICK START GUIDE =====
+﻿// ===== QUICK START GUIDE =====
 const QS_STEPS = [
     { target: '.analytics-hero', title: '👋 خوش آمدید!', desc: 'اینجا خلاصه‌ی روز شماست. ساعت زنده + آمار کلی.' },
     { target: '.command-search', title: '🔍 جستجوی سریع', desc: 'Ctrl+K برای جستجوی همه‌چیز: کارها، مخاطبان، یادداشت‌ها.' },
@@ -63,5 +63,3 @@ function skipQuickStart() {
 setTimeout(() => {
     if (!$context.state.quickStartDone) startQuickStart();
 }, 1000);
-
-console.log('[QuickStart] Guide loaded');

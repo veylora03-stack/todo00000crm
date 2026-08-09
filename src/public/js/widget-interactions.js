@@ -1,4 +1,4 @@
-// ===== WIDGET INTERACTIONS =====
+﻿// ===== WIDGET INTERACTIONS =====
 // Heatmap click → select date → filter Today's Focus
 function enableHeatmapInteraction() {
     const hm = document.getElementById('heatmapContainer');
@@ -64,5 +64,3 @@ setTimeout(() => {
     enableTimelineInteraction();
     enableInsightsInteraction();
 }, 600);
-
-console.log('[Interactions] Widget interactions enabled');

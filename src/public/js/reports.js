@@ -1,4 +1,4 @@
-// ===== REPORTS MODULE =====
+﻿// ===== REPORTS MODULE =====
 let currentReportType = 'overview';
 
 function selectReportType(type) {
@@ -162,4 +162,3 @@ function injectReportIcons() {
 }
 
 setTimeout(injectReportIcons, 300);
-console.log('[Reports] Module loaded');

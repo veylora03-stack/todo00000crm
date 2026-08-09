@@ -1,4 +1,4 @@
-// ===== CONTEXT ENGINE - Reactive State Management =====
+﻿// ===== CONTEXT ENGINE - Reactive State Management =====
 const $context = (() => {
     const state = {
         currentTask: null,
@@ -36,7 +36,7 @@ const $context = (() => {
         _notify(key, value) {
             subscribers.forEach(({ keys, callback }) => {
                 if (!keys || keys.includes(key)) {
-                    try { callback(state); } catch (e) { console.warn('[Context]', e); }
+                    try { callback(state); } catch (e) { }
                 }
             });
             document.dispatchEvent(new CustomEvent('ctx:' + key, { detail: value }));
@@ -118,5 +118,3 @@ function applyTheme() {
 
 $context.watch(['theme'], applyTheme);
 setTimeout(applyTheme, 100);
-
-console.log('[Context Engine] Reactive state management loaded');

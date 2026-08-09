@@ -1,4 +1,4 @@
-// ===== OKR MODULE (Phase 31) =====
+﻿// ===== OKR MODULE (Phase 31) =====
 function getOkrs() { try { return JSON.parse(localStorage.getItem('crm_okrs') || '[]'); } catch (e) { return []; } }
 function saveOkrs(o) { localStorage.setItem('crm_okrs', JSON.stringify(o)); }
 
@@ -79,4 +79,3 @@ const origSwitchO = window.switchView;
 window.switchView = function(v) { origSwitchO(v); if (v === 'okr') setTimeout(renderOkrs, 100); };
 
 setTimeout(() => { document.querySelectorAll('.nav-link').forEach(l => { if (l.dataset.view === 'okr') { const s = l.querySelector('.nav-icon'); if (s && typeof icon === 'function') s.innerHTML = icon('sparkle', 16); } }); }, 400);
-console.log('[OKR] loaded');

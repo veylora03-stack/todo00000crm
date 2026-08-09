@@ -1,4 +1,4 @@
-// ===== PROFESSIONAL INBOX MODULE (Phase 15) =====
+﻿// ===== PROFESSIONAL INBOX MODULE (Phase 15) =====
 let inboxItems = [];
 let inboxSelectedIndex = -1;
 
@@ -254,5 +254,3 @@ window.loadAllData = async function () {
 
 // Init
 setTimeout(() => { renderInbox(); }, 800);
-
-console.log('[Inbox] Professional module loaded');

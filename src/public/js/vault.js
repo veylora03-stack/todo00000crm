@@ -131,5 +131,3 @@ window.addEventListener('DOMContentLoaded', () => {
         setTimeout(showVaultLock, 300);
     }
 });
-
-console.log('[Vault] Module loaded');

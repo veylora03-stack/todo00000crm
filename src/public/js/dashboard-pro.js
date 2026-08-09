@@ -1,4 +1,4 @@
-// ===== DASHBOARD GOD MODE (Phase 16) =====
+﻿// ===== DASHBOARD GOD MODE (Phase 16) =====
 
 // ---------- 3D Tilt ----------
 function attachTilt(el, max) {
@@ -124,5 +124,3 @@ window.renderDashboard = function () {
     origRenderDash();
     setTimeout(enhanceDashboard, 60);
 };
-
-console.log('[DashboardGod] GOD MODE loaded');

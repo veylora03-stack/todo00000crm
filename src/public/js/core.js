@@ -1,4 +1,4 @@
-// ===== CORE MODULE =====
+﻿// ===== CORE MODULE =====
 const API = window.location.origin;
 let currentView = 'dashboard';
 let currentData = { people: [], tasks: [], ideas: [], notes: [], projects: [], logs: [] };
@@ -7,12 +7,12 @@ let currentPanelType = null;
 let taskFilter = 'all';
 
 document.addEventListener('DOMContentLoaded', () => {
-    try { injectIcons(); } catch(e) { console.warn('injectIcons:', e); }
-    try { setupNavigation(); } catch(e) { console.warn('setupNavigation:', e); }
-    try { setGreeting(); } catch(e) { console.warn('setGreeting:', e); }
-    try { loadAllData(); } catch(e) { console.warn('loadAllData:', e); }
-    try { setupKeyboard(); } catch(e) { console.warn('setupKeyboard:', e); }
-    try { setupContextMenu(); } catch(e) { console.warn('setupContextMenu:', e); }
+    try { injectIcons(); } catch(e) { }
+    try { setupNavigation(); } catch(e) { }
+    try { setGreeting(); } catch(e) { }
+    try { loadAllData(); } catch(e) { }
+    try { setupKeyboard(); } catch(e) { }
+    try { setupContextMenu(); } catch(e) { }
 });
 
 function injectIcons() {
@@ -97,17 +97,17 @@ async function loadAllData() {
             logs: Array.isArray(r[5]) ? r[5] : []
         };
         renderAll();
-    } catch (err) { console.error('loadAllData:', err); toast('خطا در بارگذاری داده‌ها', 'error'); }
+    } catch (err) { toast('خطا در بارگذاری داده‌ها', 'error'); }
 }
 
 function renderAll() {
-    try { renderDashboard(); } catch(e) { console.warn(e); }
-    try { renderPeople(); } catch(e) { console.warn(e); }
-    try { renderKanban(); } catch(e) { console.warn(e); }
-    try { renderIdeas(); } catch(e) { console.warn(e); }
-    try { renderNotes(); } catch(e) { console.warn(e); }
-    try { renderProjects(); } catch(e) { console.warn(e); }
-    try { updateCounts(); } catch(e) { console.warn(e); }
+    try { renderDashboard(); } catch(e) { }
+    try { renderPeople(); } catch(e) { }
+    try { renderKanban(); } catch(e) { }
+    try { renderIdeas(); } catch(e) { }
+    try { renderNotes(); } catch(e) { }
+    try { renderProjects(); } catch(e) { }
+    try { updateCounts(); } catch(e) { }
 }
 
 function updateCounts() {

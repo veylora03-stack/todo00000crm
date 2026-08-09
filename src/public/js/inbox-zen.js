@@ -1,4 +1,4 @@
-// ===== ZEN MODE + PARTICLES + WORKLOAD (Phase 15.4) =====
+﻿// ===== ZEN MODE + PARTICLES + WORKLOAD (Phase 15.4) =====
 
 // ---------- Workload estimate ----------
 function estimateMinutes(item) {
@@ -213,5 +213,3 @@ document.addEventListener('keydown', e => {
     else if (e.key === 's' || e.key === 'S') { e.preventDefault(); zenToggleSchedule(); }
     else if (e.key === 'x' || e.key === 'X') { e.preventDefault(); zenDo('delete'); }
 });
-
-console.log('[InboxZen] Zen + Particles + Workload loaded');

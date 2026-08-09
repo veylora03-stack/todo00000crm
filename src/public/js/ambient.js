@@ -1,4 +1,4 @@
-// ===== AMBIENT SUITE MODULE (Phase 20) =====
+﻿// ===== AMBIENT SUITE MODULE (Phase 20) =====
 
 // ---------- QUOTES ----------
 const QUOTES = [
@@ -228,5 +228,3 @@ window.renderDashboard = function() {
     origRenderDashA();
     setTimeout(() => { injectAmbient(); injectAIFab(); }, 150);
 };
-
-console.log('[Ambient] AI + Weather + Quote loaded');

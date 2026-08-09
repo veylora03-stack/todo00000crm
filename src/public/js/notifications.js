@@ -1,4 +1,4 @@
-// ===== NOTIFICATIONS MODULE =====
+﻿// ===== NOTIFICATIONS MODULE =====
 let notificationInterval = null;
 let currentNotifications = [];
 
@@ -27,7 +27,7 @@ async function checkNotifications() {
         });
         const dd = document.getElementById('notifDropdown');
         if (dd && dd.classList.contains('active')) renderNotificationDropdown();
-    } catch (e) { console.warn('checkNotifications:', e); }
+    } catch (e) { }
 }
 
 function showBrowserNotification(n) {
@@ -126,4 +126,3 @@ function setReminder(el, minutes) {
 }
 
 setTimeout(initNotifications, 500);
-console.log('[Notifications] Module loaded');

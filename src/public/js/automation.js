@@ -1,4 +1,4 @@
-// ===== AUTOMATION RULES ENGINE (Phase 31) =====
+﻿// ===== AUTOMATION RULES ENGINE (Phase 31) =====
 function getRulesState() { try { return JSON.parse(localStorage.getItem('crm_rules') || '{}'); } catch (e) { return {}; } }
 function setRuleEnabled(id, on) { const s = getRulesState(); s[id] = on; localStorage.setItem('crm_rules', JSON.stringify(s)); }
 function ruleEnabled(id) { const s = getRulesState(); return s[id] !== false; } // default on
@@ -94,4 +94,3 @@ function injectRulesUI() {
 // Run on load + every 60s
 setTimeout(() => { runAutomations(); injectRulesUI(); }, 1500);
 setInterval(runAutomations, 60000);
-console.log('[Automation] Rules engine loaded');

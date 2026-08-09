@@ -1,4 +1,4 @@
-// ===== PRO LAYOUT MODULE (Phase 22) =====
+﻿// ===== PRO LAYOUT MODULE (Phase 22) =====
 function injectZoneLabels() {
     const view = document.getElementById('view-dashboard');
     if (!view) return;
@@ -28,5 +28,3 @@ window.renderDashboard = function() {
     origRenderDashL();
     setTimeout(injectZoneLabels, 250);
 };
-
-console.log('[ProLayout] Bento + zones loaded');

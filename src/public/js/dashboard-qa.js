@@ -1,4 +1,4 @@
-// ===== DASHBOARD QA MODULE (Phase 24) =====
+﻿// ===== DASHBOARD QA MODULE (Phase 24) =====
 
 // ---------- 1) Reorder: KPI right after commandHub ----------
 const QA_ORDER = ['commandHub','statsGrid','focusSuite','chartsGrid','vitalsRow','heatmap','relWidgets','ambientRow','insights','achievements','timeline'];
@@ -189,4 +189,3 @@ window.renderDashboard = function() {
 };
 
 setTimeout(() => { qaApplyOrder(); syncZoneLabels(); }, 400);
-console.log('[DashboardQA] 8 fixes loaded');

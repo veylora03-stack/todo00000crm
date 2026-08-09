@@ -1,4 +1,4 @@
-// ===== WRAPPED MODULE (Phase 14) =====
+﻿// ===== WRAPPED MODULE (Phase 14) =====
 
 let wrappedCurrentSlide = 0;
 let wrappedSlides = [];
@@ -169,5 +169,3 @@ function addWrappedSettings() {
 }
 
 setTimeout(addWrappedSettings, 800);
-
-console.log('[Wrapped] Module loaded');

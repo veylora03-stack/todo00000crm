@@ -1,4 +1,4 @@
-// ===== BACKUP MODULE =====
+﻿// ===== BACKUP MODULE =====
 async function loadBackups() {
     const l = document.getElementById('backupList');
     if (!l) return;
@@ -176,5 +176,3 @@ async function deleteAttachment(aid, et, eid) {
         if (r.success) { toast('پیوست حذف شد', 'success'); const c = document.getElementById('attachmentsContainer'); if (c) renderAttachmentsSection(et, eid, c); }
     } catch (e) { toast('خطا', 'error'); }
 }
-
-console.log('[Backup] Module loaded');

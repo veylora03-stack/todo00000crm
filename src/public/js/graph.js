@@ -1,4 +1,4 @@
-// ===== KNOWLEDGE LINKS - SIMPLE VERSION (Phase 12 v2) =====
+﻿// ===== KNOWLEDGE LINKS - SIMPLE VERSION (Phase 12 v2) =====
 // No syntax needed! Just click to connect.
 
 function allKnowledgeItems() {
@@ -232,5 +232,3 @@ setTimeout(() => {
         }
     });
 }, 400);
-
-console.log('[KnowledgeLinks] SIMPLE version loaded');
