@@ -68,10 +68,17 @@ const lazyLoader = (() => {
         
         console.log('[Lazy] Loading view:', viewName, toLoad);
         
+        const startTime = performance.now();
+        
         // Load all chunks in parallel
         await Promise.all(toLoad.map(loadChunk));
         
         console.log('[Lazy] View ready:', viewName);
+        
+        // Track performance
+        if (typeof perfMonitor !== 'undefined') {
+            perfMonitor.trackViewLoad(viewName, toLoad, startTime);
+        }
     }
     
     return { loadView, loadChunk, loaded };
