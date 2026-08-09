@@ -1,4 +1,4 @@
-// CRM PRO CORE BUNDLE (auto) 2026-08-10 00:06
+// CRM PRO CORE BUNDLE (auto) 2026-08-10 00:11
 
 /* === core.js === */
 // ===== CORE MODULE =====
@@ -605,42 +605,59 @@ const store = (() => {
 console.log('[Store] Central store initialized');
 
 /* === router.js === */
-// ===== LAZY LOADER (Phase 39 - Performance) =====
-// Loads JS modules only when needed
+// ===== LAZY LOADER (Phase 40 - Chunked Loading) =====
+// Loads JS chunks only when needed
 
 const lazyLoader = (() => {
-    const loaded = new Set(['icons.js', 'charts.js', 'holidays.js', 'core.js', 'bus.js', 'store.js', 'vault.js', 'router.js']);
+    const loaded = new Set(['bundle-core.js']);
     
-    // Map view names to their JS files
-    const viewModules = {
-        'dashboard': ['dashboard-pro.js', 'focus-suite.js', 'vitals.js', 'dashboard-qa.js', 'context.js', 'widget-export.js', 'widget-interactions.js'],
-        'people': ['relationships.js'],
-        'tasks': ['calendar.js', 'smart.js'],
-        'ideas': ['graph.js'],
-        'notes': ['graph.js'],
-        'projects': ['projects-pro.js'],
-        'pipeline': ['pipeline.js'],
-        'companies': ['companies.js'],
-        'okr': ['okr.js'],
-        'inbox': ['inbox.js', 'inbox-design.js', 'inbox-pro.js', 'inbox-zen.js', 'gamification.js'],
-        'backups': ['backup.js', 'notifications.js'],
-        'reports': ['reports.js'],
-        'settings': ['customize.js', 'automation.js'],
-        'graph': ['graph.js'],
-        'mobile': ['mobile.js'],
-        'ambient': ['ambient.js', 'ai-insights.js'],
+    // Map view names to their required chunks
+    const viewChunks = {
+        'dashboard': ['bundle-charts.js'],
+        'people': ['bundle-crm.js'],
+        'tasks': ['bundle-productivity.js'],
+        'ideas': ['bundle-knowledge.js'],
+        'notes': ['bundle-knowledge.js'],
+        'projects': ['bundle-crm.js'],
+        'pipeline': ['bundle-crm.js'],
+        'companies': ['bundle-crm.js'],
+        'okr': ['bundle-productivity.js'],
+        'inbox': ['bundle-charts.js', 'bundle-productivity.js'],
+        'backups': ['bundle-system.js'],
+        'reports': ['bundle-charts.js', 'bundle-system.js'],
+        'settings': ['bundle-system.js'],
+        'graph': ['bundle-knowledge.js'],
     };
     
-    // Load a single script
-    function loadScript(src) {
+    // Load a single chunk
+    function loadChunk(src) {
         if (loaded.has(src)) return Promise.resolve();
         
         return new Promise((resolve, reject) => {
+            // Check if already in DOM (loaded by index.html)
+            const existing = document.querySelector(`script[src="/js/${src}"]`);
+            if (existing) {
+                if (existing.hasAttribute('data-loaded')) {
+                    loaded.add(src);
+                    resolve();
+                    return;
+                }
+                // Wait for it to load
+                existing.addEventListener('load', () => {
+                    existing.setAttribute('data-loaded', 'true');
+                    loaded.add(src);
+                    resolve();
+                });
+                existing.addEventListener('error', () => reject(new Error('Failed: ' + src)));
+                return;
+            }
+            
             const script = document.createElement('script');
             script.src = '/js/' + src;
             script.onload = () => {
+                script.setAttribute('data-loaded', 'true');
                 loaded.add(src);
-                console.log('[Lazy] Loaded:', src);
+                console.log('[Lazy] Loaded chunk:', src);
                 resolve();
             };
             script.onerror = () => reject(new Error('Failed to load ' + src));
@@ -648,26 +665,26 @@ const lazyLoader = (() => {
         });
     }
     
-    // Load all modules for a view
+    // Load all chunks for a view
     async function loadView(viewName) {
-        const modules = viewModules[viewName];
-        if (!modules) return;
+        const chunks = viewChunks[viewName];
+        if (!chunks) return;
         
-        const toLoad = modules.filter(m => !loaded.has(m));
+        const toLoad = chunks.filter(c => !loaded.has(c));
         if (toLoad.length === 0) return;
         
         console.log('[Lazy] Loading view:', viewName, toLoad);
         
-        // Load all modules in parallel for speed
-        await Promise.all(toLoad.map(loadScript));
+        // Load all chunks in parallel
+        await Promise.all(toLoad.map(loadChunk));
         
         console.log('[Lazy] View ready:', viewName);
     }
     
-    return { loadView, loadScript, loaded };
+    return { loadView, loadChunk, loaded };
 })();
 
-console.log('[Lazy] Router initialized');
+console.log('[Lazy] Router initialized (chunked)');
 
 /* === vault.js === */
 // ===== VAULT MODULE (Phase 14) =====
