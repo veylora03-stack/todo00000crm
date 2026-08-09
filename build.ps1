@@ -16,7 +16,7 @@ Write-Host ("Modules: {0}" -f $order.Count) -ForegroundColor Cyan
 # 2) Split into chunks (Phase 40 - Advanced Chunking)
 $chunks = @{
     'core' = @{
-        files = @('icons.js', 'charts.js', 'holidays.js', 'core.js', 'bus.js', 'store.js', 'vault.js', 'router.js', 'performance-monitor.js')
+        files = @('icons.js', 'charts.js', 'holidays.js', 'core.js', 'bus.js', 'store.js', 'vault.js', 'router.js', 'performance-monitor.js', 'theme-switcher.js')
         content = "// CRM PRO CORE BUNDLE (auto) " + (Get-Date -Format "yyyy-MM-dd HH:mm") + "`n"
     }
     'charts' = @{
