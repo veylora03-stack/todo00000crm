@@ -43,6 +43,10 @@
 
                 <div class="nav-group">
                     <div class="nav-group-title">CRM</div>
+                                        <div class="nav-link" data-view="pipeline">
+                        <span class="nav-icon"></span>
+                        <span class="nav-link-label">Pipeline فروش</span>
+                    </div>
                     <div class="nav-link" data-view="people">
                         <span class="nav-icon"></span>
                         <span class="nav-link-label">مخاطبان</span>
@@ -423,6 +427,20 @@
                     </div>
                     <div class="graph-container" id="graphContainer"></div>
                 </section>
+                                <!-- Pipeline View -->
+                <section id="view-pipeline" class="view">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">Pipeline فروش</h1>
+                            <div class="page-subtitle">مدیریت معاملات از سرنخ تا برد</div>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-primary" onclick="openDealModal()">+ معامله جدید</button>
+                        </div>
+                    </div>
+                    <div class="pipeline-header" id="pipelineStats"></div>
+                    <div class="pipeline-board" id="pipelineBoard"></div>
+                </section>
                 <!-- Reports View -->
                 <section id="view-reports" class="view">
                     <div class="page-header">
@@ -720,6 +738,7 @@
     <script src="js/quick-start.js"></script>
     <script src="js/ai-insights.js"></script>
     <script src="js/mobile.js"></script>
+    <script src="js/pipeline.js"></script>
 
     <script>
         // Service Worker Registration
