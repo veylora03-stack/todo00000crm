@@ -1,10 +1,10 @@
 // Service Worker for CRM Pro - Offline Support
-const CACHE_NAME = 'crm-pro-v1';
+const CACHE_NAME = 'crm-pro-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
   '/css/app.css',
-  '/js/app.js',
+  
   '/js/icons.js',
   '/js/charts.js',
   '/manifest.json'
