@@ -1,47 +1,69 @@
-{
-  "name": "CRM Pro - سیستم مدیریت شخصی",
-  "short_name": "CRM Pro",
-  "description": "سیستم مدیریت ارتباط با مشتری، کارها، ایده‌ها و یادداشت‌ها - کاملاً آفلاین",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#0a0a0b",
-  "theme_color": "#7c3aed",
-  "orientation": "any",
-  "lang": "fa",
-  "dir": "rtl",
-  "categories": ["productivity", "business"],
-  "icons": [
-    {
-      "src": "/icons/icon-192.svg",
-      "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/icons/icon-512.svg",
-      "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "افزودن مخاطب",
-      "short_name": "مخاطب",
-      "description": "ایجاد مخاطب جدید",
-      "url": "/?action=new-person"
-    },
-    {
-      "name": "افزودن کار",
-      "short_name": "کار",
-      "description": "ایجاد کار جدید",
-      "url": "/?action=new-task"
-    },
-    {
-      "name": "ثبت ایده",
-      "short_name": "ایده",
-      "description": "ثبت ایده جدید",
-      "url": "/?action=new-idea"
-    }
-  ]
+﻿{
+    "description":  "سیستم مدیریت ارتباط با مشتری آفلاین",
+    "scope":  "/",
+    "categories":  [
+                       "business",
+                       "productivity"
+                   ],
+    "name":  "CRM Pro",
+    "dir":  "rtl",
+    "icons":  [
+                  {
+                      "sizes":  "192x192",
+                      "purpose":  "any maskable",
+                      "type":  "image/svg+xml",
+                      "src":  "/icons/icon-192.svg"
+                  },
+                  {
+                      "sizes":  "512x512",
+                      "purpose":  "any maskable",
+                      "type":  "image/svg+xml",
+                      "src":  "/icons/icon-512.svg"
+                  }
+              ],
+    "shortcuts":  [
+                      {
+                          "url":  "/?view=tasks",
+                          "description":  "مشاهده کارها",
+                          "name":  "کارها",
+                          "icons":  [
+                                        {
+                                            "src":  "/icons/icon-192.svg",
+                                            "sizes":  "192x192"
+                                        }
+                                    ],
+                          "short_name":  "Tasks"
+                      },
+                      {
+                          "url":  "/?view=people",
+                          "description":  "مشاهده مخاطبان",
+                          "name":  "مخاطبان",
+                          "icons":  [
+                                        {
+                                            "src":  "/icons/icon-192.svg",
+                                            "sizes":  "192x192"
+                                        }
+                                    ],
+                          "short_name":  "People"
+                      },
+                      {
+                          "url":  "/?view=dashboard",
+                          "description":  "مشاهده داشبورد",
+                          "name":  "داشبورد",
+                          "icons":  [
+                                        {
+                                            "src":  "/icons/icon-192.svg",
+                                            "sizes":  "192x192"
+                                        }
+                                    ],
+                          "short_name":  "Dashboard"
+                      }
+                  ],
+    "orientation":  "portrait-primary",
+    "display":  "standalone",
+    "theme_color":  "#7c3aed",
+    "background_color":  "#7c3aed",
+    "start_url":  "/",
+    "short_name":  "CRM",
+    "lang":  "fa"
 }
