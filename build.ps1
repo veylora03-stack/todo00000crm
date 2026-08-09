@@ -14,7 +14,7 @@ foreach ($x in $m) { $f = $x.Groups[1].Value; if ($f -ne "bundle.js" -and $f -ne
 Write-Host ("Modules: {0}" -f $order.Count) -ForegroundColor Cyan
 
 # 2) Split into core and modules
-$coreModules = @('icons.js', 'charts.js', 'holidays.js', 'core.js', 'bus.js', 'store.js', 'vault.js')
+$coreModules = @('icons.js', 'charts.js', 'holidays.js', 'core.js', 'bus.js', 'store.js', 'vault.js', 'router.js')
 $coreBundle = "// CRM PRO CORE BUNDLE (auto) " + (Get-Date -Format "yyyy-MM-dd HH:mm") + "`n"
 $modulesBundle = "// CRM PRO MODULES BUNDLE (auto) " + (Get-Date -Format "yyyy-MM-dd HH:mm") + "`n"
 
