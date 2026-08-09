@@ -1,4 +1,4 @@
-// CRM PRO CORE BUNDLE (auto) 2026-08-10 02:09
+// CRM PRO CORE BUNDLE (auto) 2026-08-10 02:16
 
 /* === core.js === */
 // ===== CORE MODULE =====
@@ -677,7 +677,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* === theme-switcher.js === */
-// ===== THEME SWITCHER v2 (Phase 45 - with SVG Icons) =====
+// ===== THEME SWITCHER v3 (Phase 45 - Clean & Working) =====
 const themeSwitcher = (() => {
     const STORAGE_KEY = 'crm_theme';
     const TRANSITION_CLASS = 'theme-transitioning';
@@ -705,6 +705,22 @@ const themeSwitcher = (() => {
         }
     }
     
+    // Swap app-light.css stylesheet
+    function ensureLightStylesheet(on) {
+        let link = document.getElementById('app-light-css');
+        if (on && !link) {
+            link = document.createElement('link');
+            link.id = 'app-light-css';
+            link.rel = 'stylesheet';
+            link.href = '/css/app-light.css';
+            document.head.appendChild(link);
+            console.log('[Theme] Light stylesheet loaded');
+        } else if (!on && link) {
+            link.remove();
+            console.log('[Theme] Light stylesheet removed');
+        }
+    }
+    
     function applyTheme(theme, animate = true) {
         const body = document.body;
         const html = document.documentElement;
@@ -718,12 +734,22 @@ const themeSwitcher = (() => {
             }, 400);
         }
         
+        // Set data-theme attribute
         html.setAttribute('data-theme', theme);
-        ensureLightStylesheet(theme === 'light');
         if (document.body) document.body.setAttribute('data-theme', theme);
-        if (typeof $context !== 'undefined' && $context.state) { $context.state.theme = theme; }
+        
+        // Swap stylesheet
+        ensureLightStylesheet(theme === 'light');
+        
+        // Sync with legacy system
+        if (typeof $context !== 'undefined' && $context.state) {
+            $context.state.theme = theme;
+        }
+        
+        // Save preference
         localStorage.setItem(STORAGE_KEY, theme);
         
+        // Update meta theme-color
         const metaThemeColor = document.querySelector('meta[name="theme-color"]');
         if (metaThemeColor) {
             metaThemeColor.content = theme === 'dark' ? '#7c3aed' : '#ffffff';
@@ -754,25 +780,9 @@ const themeSwitcher = (() => {
             }
         });
         
-        console.log('[Theme] Switcher initialized, theme:', theme);
+        console.log('[Theme] Switcher v3 initialized, theme:', theme);
     }
     
-
-    // Swap app-light.css stylesheet for light mode
-    function ensureLightStylesheet(on) {
-        let link = document.getElementById('app-light-css');
-        if (on && !link) {
-            link = document.createElement('link');
-            link.id = 'app-light-css';
-            link.rel = 'stylesheet';
-            link.href = '/css/app-light.css';
-            document.head.appendChild(link);
-            console.log('[Theme] Light stylesheet loaded');
-        } else if (!on && link) {
-            link.remove();
-            console.log('[Theme] Light stylesheet removed');
-        }
-    }
     return { init, toggle, getCurrentTheme, applyTheme, updateToggleIcon };
 })();
 
@@ -794,7 +804,6 @@ document.addEventListener('DOMContentLoaded', () => {
             topbarActions.appendChild(toggleBtn);
         }
         
-        // Wait for IconsPro to be ready, then set initial icon
         const trySetIcon = () => {
             if (typeof IconsPro !== 'undefined') {
                 themeSwitcher.updateToggleIcon(themeSwitcher.getCurrentTheme());
@@ -807,26 +816,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.themeSwitcher = themeSwitcher;
-console.log('[Theme] Switcher v2 loaded');
-// ===== LEGACY THEME UNIFICATION =====
-const unifyContext = () => {
-    if (typeof $context !== 'undefined') {
-        $context.toggleTheme = () => themeSwitcher.toggle();
-    } else {
-        setTimeout(unifyContext, 500);
-    }
-};
-unifyContext();
-
-// Capture-phase handler: neutralize any leftover legacy theme button
-document.addEventListener('click', (e) => {
-    const legacy = e.target.closest('#themeToggle');
-    if (legacy) {
-        e.stopPropagation();
-        e.preventDefault();
-        themeSwitcher.toggle();
-    }
-}, true);
 
 /* === router.js === */
 // ===== LAZY LOADER (Phase 40 - Chunked Loading) =====
