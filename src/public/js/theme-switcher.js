@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const toggleBtn = document.createElement('button');
         toggleBtn.className = 'icon-button theme-toggle-btn';
         toggleBtn.title = 'تغییر تم';
-        toggleBtn.innerHTML = '<span class="theme-toggle"><span class="theme-toggle-thumb">🌓</span></span>';
+        toggleBtn.innerHTML = '<span class="theme-toggle"><span class="theme-toggle-thumb" id="themeToggleIcon"></span></span>';
         toggleBtn.onclick = () => themeSwitcher.toggle();
         
         // Insert before settings button
