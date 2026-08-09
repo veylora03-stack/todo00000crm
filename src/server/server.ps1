@@ -1,4 +1,4 @@
-# Local CRM Pro Server - Complete Clean Version
+﻿# Local CRM Pro Server - Complete Clean Version
 # All routes: CRUD + Search + Backup + Export/Import + Attachments + PWA
 
 $ErrorActionPreference = 'Stop'
@@ -22,6 +22,26 @@ Write-Host "=============================================" -ForegroundColor Cyan
 Write-Host ""
 
 # ===== Helper Functions =====
+
+# ===== GZIP COMPRESSION (Phase 37 - Performance) =====
+function Compress-Content {
+    param([byte[]]$Bytes, [string]$AcceptEncoding)
+    
+    if ($AcceptEncoding -match 'gzip' -and $Bytes.Length -gt 1024) {
+        $ms = New-Object System.IO.MemoryStream
+        $gzip = New-Object System.IO.Compression.GzipStream($ms, [System.IO.Compression.CompressionMode]::Compress, $true)
+        $gzip.Write($Bytes, 0, $Bytes.Length)
+        $gzip.Close()
+        $compressed = $ms.ToArray()
+        $ms.Close()
+        
+        if ($compressed.Length -lt $Bytes.Length) {
+            return @{ Bytes = $compressed; Encoding = 'gzip' }
+        }
+    }
+    return @{ Bytes = $Bytes; Encoding = $null }
+}
+
 function Send-Response {
     param($Context, [int]$StatusCode = 200, [string]$ContentType = "text/plain", [string]$Content = "", [byte[]]$Bytes = $null)
     try {
@@ -152,6 +172,26 @@ Write-Host "=============================================" -ForegroundColor Cyan
 Write-Host ""
 
 # ===== Helper Functions =====
+
+# ===== GZIP COMPRESSION (Phase 37 - Performance) =====
+function Compress-Content {
+    param([byte[]]$Bytes, [string]$AcceptEncoding)
+    
+    if ($AcceptEncoding -match 'gzip' -and $Bytes.Length -gt 1024) {
+        $ms = New-Object System.IO.MemoryStream
+        $gzip = New-Object System.IO.Compression.GzipStream($ms, [System.IO.Compression.CompressionMode]::Compress, $true)
+        $gzip.Write($Bytes, 0, $Bytes.Length)
+        $gzip.Close()
+        $compressed = $ms.ToArray()
+        $ms.Close()
+        
+        if ($compressed.Length -lt $Bytes.Length) {
+            return @{ Bytes = $compressed; Encoding = 'gzip' }
+        }
+    }
+    return @{ Bytes = $Bytes; Encoding = $null }
+}
+
 function Send-Response {
     param($Context, [int]$StatusCode = 200, [string]$ContentType = "text/plain", [string]$Content = "", [byte[]]$Bytes = $null)
     try {
@@ -289,6 +329,26 @@ Write-Host "=============================================" -ForegroundColor Cyan
 Write-Host ""
 
 # ===== Helper Functions =====
+
+# ===== GZIP COMPRESSION (Phase 37 - Performance) =====
+function Compress-Content {
+    param([byte[]]$Bytes, [string]$AcceptEncoding)
+    
+    if ($AcceptEncoding -match 'gzip' -and $Bytes.Length -gt 1024) {
+        $ms = New-Object System.IO.MemoryStream
+        $gzip = New-Object System.IO.Compression.GzipStream($ms, [System.IO.Compression.CompressionMode]::Compress, $true)
+        $gzip.Write($Bytes, 0, $Bytes.Length)
+        $gzip.Close()
+        $compressed = $ms.ToArray()
+        $ms.Close()
+        
+        if ($compressed.Length -lt $Bytes.Length) {
+            return @{ Bytes = $compressed; Encoding = 'gzip' }
+        }
+    }
+    return @{ Bytes = $Bytes; Encoding = $null }
+}
+
 function Send-Response {
     param($Context, [int]$StatusCode = 200, [string]$ContentType = "text/plain", [string]$Content = "", [byte[]]$Bytes = $null)
     try {
@@ -1097,6 +1157,26 @@ Write-Host "=============================================" -ForegroundColor Cyan
 Write-Host ""
 
 # ===== Helper Functions =====
+
+# ===== GZIP COMPRESSION (Phase 37 - Performance) =====
+function Compress-Content {
+    param([byte[]]$Bytes, [string]$AcceptEncoding)
+    
+    if ($AcceptEncoding -match 'gzip' -and $Bytes.Length -gt 1024) {
+        $ms = New-Object System.IO.MemoryStream
+        $gzip = New-Object System.IO.Compression.GzipStream($ms, [System.IO.Compression.CompressionMode]::Compress, $true)
+        $gzip.Write($Bytes, 0, $Bytes.Length)
+        $gzip.Close()
+        $compressed = $ms.ToArray()
+        $ms.Close()
+        
+        if ($compressed.Length -lt $Bytes.Length) {
+            return @{ Bytes = $compressed; Encoding = 'gzip' }
+        }
+    }
+    return @{ Bytes = $Bytes; Encoding = $null }
+}
+
 function Send-Response {
     param($Context, [int]$StatusCode = 200, [string]$ContentType = "text/plain", [string]$Content = "", [byte[]]$Bytes = $null)
     try {
