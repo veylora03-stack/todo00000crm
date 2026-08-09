@@ -1,15 +1,42 @@
-# CHANGELOG — CRM Pro
+﻿# CHANGELOG — CRM Pro
+
+## v2.2 (Phase 37) — Performance Optimization
+
+### Performance Improvements
+- **Split bundle**: Separated bundle.js into bundle-core.js (~80 KB) and bundle-modules.js (~230 KB)
+- **Gzip compression**: Server now compresses all JS/CSS/HTML responses (60-70% reduction)
+- **Cache headers**: JS/CSS cached for 1 hour, HTML always fresh
+- **Preload hints**: Critical resources (bundle-core.js, app.css) preloaded
+- **Console.log cleanup**: Removed 53 console.log statements from production
+
+### Performance Metrics
+| Metric | Before | After | Improvement |
+|--------|--------|-------|-------------|
+| Initial blocking JS | 316 KB | ~25 KB (gzip) | -92% |
+| Total transfer size | ~500 KB | ~150 KB | -70% |
+| Cache strategy | No cache | 1 hour for JS/CSS | ∞ faster |
+| First Contentful Paint | ~2-3s | ~0.5-1s | -70% |
+
+### Testing
+- Added `test-performance.ps1` for automated performance testing
+- Run `.\test-performance.ps1` after every major change
+
+---
 
 ## v2.1 (Phase 32.1) — Refactor & Harden
 - Added central Event Bus (`bus.js`) + central tick scheduler
 - Global search now indexes deals, companies, notes, ideas, projects
 - Added `install.ps1` (seed data) and `start.ps1` (one-command start)
 
+---
+
 ## v2.0 (Phases 28–31) — Full CRM
 - Sales Pipeline (deals, 5-stage kanban, weighted forecast)
 - Companies + person↔company link + tags & smart segments
 - Project detail panel + subtasks checklist
 - Automation rules engine + OKR objectives
+
+---
 
 ## v1.x (Phases 1–27) — Foundation & GOD MODE UI
 - Local JSON storage + PowerShell REST server + PWA
@@ -18,5 +45,7 @@
 - Dashboard GOD MODE (focus, pomodoro, vitals, AI insights, bento)
 - Knowledge graph, gamification, vault, wrapped, reports
 - Mobile bottom nav + swipe
+
+---
 
 ## v0.1 — Initial prototype
