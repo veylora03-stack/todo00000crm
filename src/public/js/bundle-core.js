@@ -1,4 +1,4 @@
-// CRM PRO CORE BUNDLE (auto) 2026-08-10 01:58
+// CRM PRO CORE BUNDLE (auto) 2026-08-10 02:03
 
 /* === core.js === */
 // ===== CORE MODULE =====
@@ -719,6 +719,8 @@ const themeSwitcher = (() => {
         }
         
         html.setAttribute('data-theme', theme);
+        if (document.body) document.body.setAttribute('data-theme', theme);
+        if (typeof $context !== 'undefined' && $context.state) { $context.state.theme = theme; }
         localStorage.setItem(STORAGE_KEY, theme);
         
         const metaThemeColor = document.querySelector('meta[name="theme-color"]');
@@ -789,6 +791,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
 window.themeSwitcher = themeSwitcher;
 console.log('[Theme] Switcher v2 loaded');
+// ===== LEGACY THEME UNIFICATION =====
+const unifyContext = () => {
+    if (typeof $context !== 'undefined') {
+        $context.toggleTheme = () => themeSwitcher.toggle();
+    } else {
+        setTimeout(unifyContext, 500);
+    }
+};
+unifyContext();
+
+// Capture-phase handler: neutralize any leftover legacy theme button
+document.addEventListener('click', (e) => {
+    const legacy = e.target.closest('#themeToggle');
+    if (legacy) {
+        e.stopPropagation();
+        e.preventDefault();
+        themeSwitcher.toggle();
+    }
+}, true);
 
 /* === router.js === */
 // ===== LAZY LOADER (Phase 40 - Chunked Loading) =====
