@@ -40,6 +40,7 @@ const themeSwitcher = (() => {
         }
         
         html.setAttribute('data-theme', theme);
+        ensureLightStylesheet(theme === 'light');
         if (document.body) document.body.setAttribute('data-theme', theme);
         if (typeof $context !== 'undefined' && $context.state) { $context.state.theme = theme; }
         localStorage.setItem(STORAGE_KEY, theme);
@@ -77,6 +78,22 @@ const themeSwitcher = (() => {
         console.log('[Theme] Switcher initialized, theme:', theme);
     }
     
+
+    // Swap app-light.css stylesheet for light mode
+    function ensureLightStylesheet(on) {
+        let link = document.getElementById('app-light-css');
+        if (on && !link) {
+            link = document.createElement('link');
+            link.id = 'app-light-css';
+            link.rel = 'stylesheet';
+            link.href = '/css/app-light.css';
+            document.head.appendChild(link);
+            console.log('[Theme] Light stylesheet loaded');
+        } else if (!on && link) {
+            link.remove();
+            console.log('[Theme] Light stylesheet removed');
+        }
+    }
     return { init, toggle, getCurrentTheme, applyTheme, updateToggleIcon };
 })();
 
