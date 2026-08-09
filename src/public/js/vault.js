@@ -1,17 +1,10 @@
-// ===== VAULT MODULE (Phase 14) =====
+﻿// ===== VAULT MODULE (Phase 14) =====
 
 const VAULT_HASH_KEY = 'crm_vault_hash';
 const VAULT_UNLOCK_KEY = 'crm_vault_unlocked';
 const AUTO_LOCK_MINUTES = 5;
 
-function hashPassword(pwd) {
-    let h = 0;
-    for (let i = 0; i < pwd.length; i++) {
-        h = ((h << 5) - h) + pwd.charCodeAt(i);
-        h |= 0;
-    }
-    return 'v1_' + Math.abs(h).toString(36);
-}
+async function hashPassword(pwd){const s=localStorage.getItem('crm_vault_salt')||(()=>{const a=new Uint8Array(16);crypto.getRandomValues(a);const x=Array.from(a).map(b=>b.toString(16).padStart(2,'0')).join('');localStorage.setItem('crm_vault_salt',x);return x})();const d=new TextEncoder().encode(s+':'+pwd);const b=await crypto.subtle.digest('SHA-256',d);return 'v2_'+Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');}
 
 function isVaultEnabled() { return !!localStorage.getItem(VAULT_HASH_KEY); }
 function isVaultUnlocked() { return sessionStorage.getItem(VAULT_UNLOCK_KEY) === '1'; }
@@ -36,7 +29,7 @@ function showVaultLock() {
     if (p2) p2.addEventListener('keydown', e => { if (e.key === 'Enter') submitVault(); });
 }
 
-function submitVault() {
+async function submitVault() {
     const pwd = document.getElementById('vaultPwd').value;
     const pwd2 = document.getElementById('vaultPwd2');
     const hasPw = isVaultEnabled();
